@@ -1,0 +1,70 @@
+﻿<!DOCTYPE html>
+<html ng-app="quizApp">
+<head>
+    <title>Quiz</title>
+    <script src="../Libraries/angular.js"></script>
+    <script src="model.js"></script>
+    <link href="../Libraries/bootstrap.css" rel="stylesheet" />
+    <link href="../Libraries/bootstrap-theme.css" rel="stylesheet" />
+
+    <script>
+        // Модуль
+        var newsListApp = angular.module("quizApp", []);
+
+        // Контроллер
+        newsListApp.controller("QuizCtrl", function ($scope) {
+            $scope.data = model;
+            $scope.selectedQuestion = 0;
+           
+        });
+        
+
+
+    </script>
+</head>
+<body ng-controller="QuizCtrl">
+    {{selectedQuestion}}
+    <div class="panel-body">
+        <div class="panel panel-default">
+            <h1 class="panel-heading">QUIZ</h1>
+            <div class="panel-body">
+
+                
+                <div ng-switch on="selectedQuestion">
+                    <div class="well">
+                        <input type="radio" name="Questions" value="0" ng-model="selectedQuestion" checked> Вопрос 1<br>
+                        <p>{{data[0].question}}</p>                      
+                        
+                        <div ng-switch-when="0">
+                            <div class="well" ng-repeat="variant in data[0].variants">
+                                <input type="radio" name="Variants_{{itemIndex}}" value="{{$index}}"> {{variant}}<br>
+                            </div>
+                        </div>
+
+                    </div>
+                    
+                    <div class="well">
+                        <input type="radio" name="Questions" value="1" ng-model="selectedQuestion"> Вопрос 2<br>
+                        <p>{{data[1].question}}</p>
+
+                        <div ng-switch-when="1">
+                            <div class="well" ng-repeat="variant in data[1].variants">
+                                <input type="radio" name="Variants_{{itemIndex}}" value="{{$index}}"> {{variant}}<br>
+                            </div>
+                        </div>
+
+                    </div>
+                    
+
+
+
+
+
+                </div>
+
+
+            </div>
+        </div>
+    </div>
+</body>
+</html>
