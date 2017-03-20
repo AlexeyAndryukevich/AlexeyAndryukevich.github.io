@@ -15,9 +15,9 @@
         newsListApp.controller("QuizCtrl", function ($scope) {
             $scope.data = model;
             $scope.selectedQuestion = 0;
-           
+
         });
-        
+
 
 
     </script>
@@ -29,12 +29,12 @@
             <h1 class="panel-heading">QUIZ</h1>
             <div class="panel-body">
 
-                
+
                 <div ng-switch on="selectedQuestion">
                     <div class="well">
                         <input type="radio" name="Questions" value="0" ng-model="selectedQuestion" checked> Вопрос 1<br>
-                        <p>{{data[0].question}}</p>                      
-                        
+                        <p>{{data[0].question}}</p>
+
                         <div ng-switch-when="0">
                             <div class="well" ng-repeat="variant in data[0].variants">
                                 <input type="radio" name="Variants_{{itemIndex}}" value="{{$index}}"> {{variant}}<br>
@@ -42,7 +42,7 @@
                         </div>
 
                     </div>
-                    
+
                     <div class="well">
                         <input type="radio" name="Questions" value="1" ng-model="selectedQuestion"> Вопрос 2<br>
                         <p>{{data[1].question}}</p>
@@ -54,9 +54,36 @@
                         </div>
 
                     </div>
-                    
 
+                    <div class="well">
+                        <input type="radio" name="Questions" value="2" ng-model="selectedQuestion"> Вопрос 3<br>
+                        <p>{{data[2].question}}</p>
+                        <div ng-switch-when="2">
+                            <div class="well" ng-repeat="variant in data[2].variants">
+                                <input type="radio" name="Variants_{{itemIndex}}" value="{{$index}}"> {{variant}}<br>
+                            </div>
+                        </div>
+                    </div>
 
+                    <div class="well">
+                        <input type="radio" name="Questions" value="3" ng-model="selectedQuestion"> Вопрос 4<br>
+                        <p>{{data[3].question}}</p>
+                        <div ng-switch-when="3">
+                            <div class="well" ng-repeat="variant in data[3].variants">
+                                <input type="radio" name="Variants_{{itemIndex}}" value="{{$index}}"> {{variant}}<br>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="well">
+                        <input type="radio" name="Questions" value="4" ng-model="selectedQuestion"> Вопрос 5<br>
+                        <p>{{data[4].question}}</p>
+                        <div ng-switch-when="4">
+                            <div class="well" ng-repeat="variant in data[4].variants">
+                                <input type="radio" name="Variants_{{itemIndex}}" value="{{$index}}"> {{variant}}<br>
+                            </div>
+                        </div>
+                    </div>
 
 
 
