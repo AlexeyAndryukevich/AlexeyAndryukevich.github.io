@@ -17,7 +17,7 @@ angular.module('ngSnake', [])
 
 
 
-    var BOARD_SIZE_X = 100, BOARD_SIZE_Y = 50;
+    var BOARD_SIZE_X = 25, BOARD_SIZE_Y = 50;
 
     var DIRECTIONS = {
       LEFT: 37,
@@ -169,11 +169,11 @@ angular.module('ngSnake', [])
         tempDirection = DIRECTIONS.DOWN;
       }
     };
-
+      /*
     function touchCatched(e) {
         touch = e;
     }
-
+*/
     function touchEnded(e) {
         var offsetX = touch.changedTouches[0].clientX - e.changedTouches[0].clientX;
         var offsetY = touch.changedTouches[0].clientY - e.changedTouches[0].clientY;
@@ -197,7 +197,7 @@ angular.module('ngSnake', [])
     }
       
     $window.addEventListener("keydown", changeDirection, false);
-    $window.addEventListener("touchstart", touchCatched, false);
+    //$window.addEventListener("touchstart", touchCatched, false);
     $window.addEventListener("touchmove", touchEnded, false);
 
 
