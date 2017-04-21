@@ -17,7 +17,7 @@ angular.module('ngSnake', [])
 
 
 
-    var BOARD_SIZE_X = 40, BOARD_SIZE_Y = 60;
+    var BOARD_SIZE_X = 40, BOARD_SIZE_Y = 50;
 
     var DIRECTIONS = {
       LEFT: 37,
