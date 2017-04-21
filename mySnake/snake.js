@@ -3,21 +3,31 @@ angular.module('ngSnake', [])
 
   .controller('snakeCtrl', function ($scope, $timeout, $window) {
 
-      /*
-      добавть тач
-посмотреть как сделан прирост в других
-переделыватьпод х, у
-довавлять области...
-      */
+  
+  var BOARD_SIZE_X = 40, BOARD_SIZE_Y = 20;
+	$scope.height = $window.innerWidth;
+	console.log(($scope.height-100)/3*2);
+	
+	 //height: 100px
+	
+	/*
+	$window.resize(function(){
+		
+	});*/
+      
+	/*     
+		посмотреть как сделан прирост в других
+		довавлять области...
+	*/
+
+
+	$scope.hgt = ($window.innerWidth -20)/BOARD_SIZE_X;
 
 
 
 
 
-
-
-
-    var BOARD_SIZE_X = 40, BOARD_SIZE_Y = 50;
+    
 
     var DIRECTIONS = {
       LEFT: 37,
