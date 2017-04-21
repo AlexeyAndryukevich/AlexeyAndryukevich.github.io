@@ -22,8 +22,17 @@ angular.module('ngSnake', [])
 
 
 	$scope.hgt = ($window.innerWidth -20)/BOARD_SIZE_X;
+	
 
-
+	
+	$scope.add = function (){
+		$scope.height = $scope.height + 100;
+		$scope.hgt = ($window.innerWidth -20)/BOARD_SIZE_X;
+	}
+	
+		angular.element($window).on('resize', function() {
+            $scope.$apply($scope.add);
+        });
 
 
 
