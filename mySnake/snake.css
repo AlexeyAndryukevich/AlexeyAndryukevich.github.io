@@ -8,13 +8,13 @@
 }
 
 .row {
-	height: 20px;
+	height: 10px;
 }
 
 .column {
 	/*border: 1px solid white;*/
-	width: 20px;
-	height: 20px;
+	width: 10px;
+	height: 10px;
 	display: inline-block;
 }
 
