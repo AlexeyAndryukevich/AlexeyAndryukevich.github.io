@@ -6,7 +6,6 @@ angular.module('ngSnake', [])
   
   var BOARD_SIZE_X = 40, BOARD_SIZE_Y = 50;
 	
-	 //height: 100px
 	
 	/*
 	$window.resize(function(){
@@ -14,8 +13,8 @@ angular.module('ngSnake', [])
 	});*/
       
 	/*     
-		посмотреть как сделан прирост в других
-		довавлять области...
+		пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅ пїЅпїЅпїЅпїЅпїЅпїЅ
+		пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ...
 	*/
 
 
@@ -56,7 +55,7 @@ angular.module('ngSnake', [])
     var COLORS = {
       GAME_OVER: '#820303',
       FRUIT: '#E80505',
-      SNAKE_HEAD: '#0DFF00', //'#078F00',  // Надо будет убрать все что связано с head
+      SNAKE_HEAD: '#0DFF00', //'#078F00',  // пїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅ пїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅ head
       SNAKE_BODY: '#0DFF00',
       BOARD: '#000'
     };
@@ -69,7 +68,7 @@ angular.module('ngSnake', [])
       }]
     };
 
-    var fruit = {  // здесь будет массив
+    var fruit = {  // пїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ
       x: -1,
       y: -1
     };
@@ -174,7 +173,7 @@ angular.module('ngSnake', [])
       setupBoard();
     }
 
-    function setupBoard() {  // можно добавить свойств в этот массив, а можно через window сделать с=массив DOM элементов...
+    function setupBoard() {  // пїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅ пїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ, пїЅ пїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅ window пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅ=пїЅпїЅпїЅпїЅпїЅпїЅ DOM пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ...
       $scope.board = [];
       for (var i = 0; i < BOARD_SIZE_Y; i++) {
         $scope.board[i] = [];
@@ -185,7 +184,7 @@ angular.module('ngSnake', [])
     }
     setupBoard();
 
-    var changeDirection = function(e) { // было keyup и был дискомфорт в управлении
+    var changeDirection = function(e) { // пїЅпїЅпїЅпїЅ keyup пїЅ пїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ
       if (e.keyCode == DIRECTIONS.LEFT && snake.direction !== DIRECTIONS.RIGHT) {
         tempDirection = DIRECTIONS.LEFT;
       } else if (e.keyCode == DIRECTIONS.UP && snake.direction !== DIRECTIONS.DOWN) {
