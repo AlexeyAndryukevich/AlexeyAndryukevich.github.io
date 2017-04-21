@@ -1,7 +1,4 @@
 
-swiperefreshLayout.setRefreshing( false );
-swiprefreshLayout.setEnabled( false );
-
 angular.module('ngSnake', [])
 
   .controller('snakeCtrl', function ($scope, $timeout, $window) {

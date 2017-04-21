@@ -7,6 +7,12 @@
 	float: left;
 }
 
+   body {
+  
+    overflow-y: hidden; /* To disable android's chrome pull-down-to-refresh feature*/
+   }
+
+
 .row {
 	height: 10px;
 }
