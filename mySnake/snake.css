@@ -5,6 +5,8 @@
 #gameContainer, #pastScores {
 	/*width: 600px;*/
 	float: left;
+      width: 100%;
+  text-align: center;
 }
 
    body {
@@ -25,15 +27,16 @@
 }
 
 #startGame {
-	width: 80px;
+	width: 120px;
 	padding: 5px;
 	margin-top: 10px;
 	text-align: center;
 	background-color: green;
 	color: white;
+    display: inline-block;
 }
 
 #startGame:hover {
-	color: red;
+	/*color: red;*/
 	cursor: pointer;
 }

@@ -4,9 +4,7 @@ angular.module('ngSnake', [])
   .controller('snakeCtrl', function ($scope, $timeout, $window) {
 
   
-  var BOARD_SIZE_X = 40, BOARD_SIZE_Y = 20;
-	$scope.height = $window.innerWidth;
-	console.log(($scope.height-100)/3*2);
+  var BOARD_SIZE_X = 40, BOARD_SIZE_Y = 50;
 	
 	 //height: 100px
 	
@@ -21,17 +19,24 @@ angular.module('ngSnake', [])
 	*/
 
 
-	$scope.hgt = ($window.innerWidth -20)/BOARD_SIZE_X;
+  //$scope.hgt = ($window.innerWidth - 20) / BOARD_SIZE_X;
+
+  //if ($window.innerWidth > $window.innerHeight)
 	
+  $scope.hgt = ($window.innerHeight - 80) / BOARD_SIZE_Y;
+
+  if ($scope.hgt * BOARD_SIZE_X > $window.innerWidth) {
+      $scope.hgt = ($window.innerWidth - 20) / BOARD_SIZE_X;
+  }
 
 	
-	$scope.add = function (){
+	$scope.resize = function (){
 		$scope.height = $scope.height + 100;
 		$scope.hgt = ($window.innerWidth -20)/BOARD_SIZE_X;
 	}
 	
 		angular.element($window).on('resize', function() {
-            $scope.$apply($scope.add);
+            $scope.$apply($scope.resize);
         });
 
 
