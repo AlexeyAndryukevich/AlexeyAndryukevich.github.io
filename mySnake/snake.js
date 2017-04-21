@@ -25,16 +25,16 @@ angular.module('ngSnake', [])
 	
   $scope.hgt = ($window.innerHeight - 80) / BOARD_SIZE_Y;
 
-  if ($scope.hgt * BOARD_SIZE_X > $window.innerWidth) {
-      $scope.hgt = ($window.innerWidth - 200) / BOARD_SIZE_X;
+  if ($scope.hgt * BOARD_SIZE_X > $window.innerWidth - 20) {
+      $scope.hgt = ($window.innerWidth - 20) / BOARD_SIZE_X;
   }
 
 	
 	$scope.resize = function (){
 	    $scope.hgt = ($window.innerHeight - 80) / BOARD_SIZE_Y;
 
-	    if ($scope.hgt * BOARD_SIZE_X > $window.innerWidth) {
-	        $scope.hgt = ($window.innerWidth - 200) / BOARD_SIZE_X;
+	    if ($scope.hgt * BOARD_SIZE_X > $window.innerWidth -20) {
+	        $scope.hgt = ($window.innerWidth - 20) / BOARD_SIZE_X;
 	    }
 	}
 	
