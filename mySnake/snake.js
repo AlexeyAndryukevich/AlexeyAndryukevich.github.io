@@ -89,7 +89,7 @@ angular.module('ngSnake', [])
         return COLORS.FRUIT;
       } else if (snake.parts[0].x == row && snake.parts[0].y == col) {
         return COLORS.SNAKE_HEAD;
-      } else if ($scope.board[col][row] === true) {
+      } else if ($scope.board[col][row] === "snake") {
         return COLORS.SNAKE_BODY;
       }
       return COLORS.BOARD;
@@ -106,11 +106,11 @@ angular.module('ngSnake', [])
 
       // Remove tail
       var oldTail = snake.parts.pop();
-      $scope.board[oldTail.y][oldTail.x] = false;
+      $scope.board[oldTail.y][oldTail.x] = "board";
 
       // Pop tail to head
       snake.parts.unshift(newHead);
-      $scope.board[newHead.y][newHead.x] = true;
+      $scope.board[newHead.y][newHead.x] = "snake";
 
       // Do it again
       snake.direction = tempDirection;
@@ -138,7 +138,7 @@ angular.module('ngSnake', [])
     }
 
     function selfCollision(part) {
-      return $scope.board[part.y][part.x] === true;
+      return $scope.board[part.y][part.x] === "snake";
     }
 
     function fruitCollision(part) {
@@ -149,7 +149,7 @@ angular.module('ngSnake', [])
       var x = Math.floor(Math.random() * BOARD_SIZE_X);
       var y = Math.floor(Math.random() * BOARD_SIZE_Y);
 
-      if ($scope.board[y][x] === true) {
+      if ($scope.board[y][x] === "snake") {
         return resetFruit();
       }
       fruit = {x: x, y: y};
@@ -183,7 +183,7 @@ angular.module('ngSnake', [])
       for (var i = 0; i < BOARD_SIZE_Y; i++) {
         $scope.board[i] = [];
         for (var j = 0; j < BOARD_SIZE_X; j++) {
-          $scope.board[i][j] = false;
+          $scope.board[i][j] = "board";
         }
       }
     }
