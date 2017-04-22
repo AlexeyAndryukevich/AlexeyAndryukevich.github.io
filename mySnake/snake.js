@@ -206,8 +206,10 @@ angular.module('ngSnake', [])
     }
 
     function touchEnded(e) {
-        var offsetX = e.changedTouches[e.changedTouches.length].clientX - e.changedTouches[0].clientX;
-        var offsetY = e.changedTouches[e.changedTouches.length].clientY - e.changedTouches[0].clientY;
+        var offsetX = touch.changedTouches[0].clientX - e.changedTouches[0].clientX;
+        var offsetY = touch.changedTouches[0].clientY - e.changedTouches[0].clientY;
+
+        console.log(offsetX, offsetY);
 
         var rule = new Object();
 
@@ -228,7 +230,7 @@ angular.module('ngSnake', [])
     }
       
     $window.addEventListener("keydown", changeDirection, false);
-    //$window.addEventListener("touchstart", touchCatched, false);
+    $window.addEventListener("touchstart", touchCatched, false);
     $window.addEventListener("touchmove", touchEnded, false);
 
 
