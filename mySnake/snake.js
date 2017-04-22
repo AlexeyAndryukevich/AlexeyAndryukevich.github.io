@@ -5,6 +5,8 @@ angular.module('ngSnake', [])
 
   
   var BOARD_SIZE_X = 40, BOARD_SIZE_Y = 50;
+
+  var CHAIR_DX=10, CHAIR_X=20, CHAIR_DY=20, CHAIR_Y = 20;
 	
   /*
     - сделать области: стулья и т.д.
@@ -62,7 +64,8 @@ angular.module('ngSnake', [])
       FRUIT: '#E80505',
       SNAKE_HEAD: '#0DFF00', //'#078F00',  // ���� ����� ������ ��� ��� ������� � head
       SNAKE_BODY: '#0DFF00',
-      BOARD: '#000'
+      BOARD: '#000',
+      CHAIR: '#0000ee'
     };
 
     var snake = {
@@ -91,6 +94,8 @@ angular.module('ngSnake', [])
         return COLORS.SNAKE_HEAD;
       } else if ($scope.board[col][row] === "snake") {
         return COLORS.SNAKE_BODY;
+      } else if ($scope.board[col][row] === "chair") {
+        return COLORS.CHAIR;
       }
       return COLORS.BOARD;
     };
@@ -98,7 +103,7 @@ angular.module('ngSnake', [])
     function update() {
       var newHead = getNewHead();
 
-      if (boardCollision(newHead) || selfCollision(newHead)) {
+      if (boardCollision(newHead) || chairCollision(newHead) || selfCollision(newHead)) {
         return gameOver();
       } else if (fruitCollision(newHead)) {
         eatFruit();
@@ -135,6 +140,10 @@ angular.module('ngSnake', [])
 
     function boardCollision(part) {
       return part.x === BOARD_SIZE_X || part.x === -1 || part.y === BOARD_SIZE_Y || part.y === -1;
+    }
+
+    function chairCollision(part) {
+      return part.x === CHAIR_DX || part.x === CHAIR_DX+CHAIR_X || part.y === CHAIR_DY || part.y === CHAIR_DY+CHAIR_Y;
     }
 
     function selfCollision(part) {
@@ -188,6 +197,16 @@ angular.module('ngSnake', [])
       }
     }
     setupBoard();
+
+    function setupChairs(dx,x,dy,y) {  // ����� �������� ������� � ���� ������, � ����� ����� window ������� �=������ DOM ���������...
+      console.log(dx, dy);
+      for (var i = 0; i < y; i++) {
+        for (var j = 0; j < x; j++) {
+          $scope.board[dy+j][dx+i] = "chair";
+        }
+      }
+    }
+    setupChairs(CHAIR_DX,CHAIR_X,CHAIR_DY,CHAIR_Y);
 
     var changeDirection = function(e) { // ���� keyup � ��� ���������� � ����������
       if (e.keyCode == DIRECTIONS.LEFT && snake.direction !== DIRECTIONS.RIGHT) {
