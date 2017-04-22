@@ -6,6 +6,11 @@ angular.module('ngSnake', [])
   
   var BOARD_SIZE_X = 40, BOARD_SIZE_Y = 50;
 	
+  /*
+    - сделать области: стулья и т.д.
+    - сделать через DOM - ускорить
+    - поработать со стилями чтоб Material Desining или похожее 
+  */
 	
 	/*
 	$window.resize(function(){
@@ -201,8 +206,8 @@ angular.module('ngSnake', [])
     }
 
     function touchEnded(e) {
-        var offsetX = touch.changedTouches[0].clientX - e.changedTouches[0].clientX;
-        var offsetY = touch.changedTouches[0].clientY - e.changedTouches[0].clientY;
+        var offsetX = e.changedTouches[e.changedTouches.length].clientX - e.changedTouches[0].clientX;
+        var offsetY = e.changedTouches[e.changedTouches.length].clientY - e.changedTouches[0].clientY;
 
         var rule = new Object();
 
@@ -223,7 +228,7 @@ angular.module('ngSnake', [])
     }
       
     $window.addEventListener("keydown", changeDirection, false);
-    $window.addEventListener("touchstart", touchCatched, false);
+    //$window.addEventListener("touchstart", touchCatched, false);
     $window.addEventListener("touchmove", touchEnded, false);
 
 
