@@ -7,6 +7,8 @@ angular.module('ngSnake', [])
   var BOARD_SIZE_X = 40, BOARD_SIZE_Y = 50;
 
   var CHAIR_DX=10, CHAIR_X=20, CHAIR_DY=20, CHAIR_Y = 20;
+
+  var NUM_OF_FRUITS = 10;
 	
   /*
     - сделать области: стулья и т.д.
@@ -82,6 +84,12 @@ angular.module('ngSnake', [])
       y: -1
     };
 
+    
+    var fruits = [];
+    for (var i=0; i<NUM_OF_FRUITS; i++) {
+      fruits.push({x:-1, y:-1});
+    }
+
     var interval, tempDirection, isGameOver;
 
     $scope.score = 0;
@@ -91,14 +99,14 @@ angular.module('ngSnake', [])
         return COLORS.GAME_OVER;
       } else if (fruit.x == row && fruit.y == col) {
         return COLORS.FRUIT;
-      } else if (snake.parts[0].x == row && snake.parts[0].y == col) {
-        return COLORS.SNAKE_HEAD;
       } else if ($scope.board[col][row] === "snake") {
         return COLORS.SNAKE_BODY;
       } else if ($scope.board[col][row] === "chair") {
         return COLORS.CHAIR;
       } else if ($scope.board[col][row] === "emptyChair") {
         return COLORS.EMPTY_CHAIR;
+      } else if ($scope.board[col][row] === "fruit") {
+        return COLORS.FRUIT;
       }
       return COLORS.BOARD;
     };
@@ -157,7 +165,7 @@ angular.module('ngSnake', [])
     }
 
     function fruitCollision(part) {
-      return part.x === fruit.x && part.y === fruit.y;
+      return $scope.board[part.y][part.x] === "fruit";
     }
 
     function resetFruit() {
@@ -170,6 +178,20 @@ angular.module('ngSnake', [])
       fruit = {x: x, y: y};
 
     }
+
+    
+    function resetNumFruit(fruit) {
+      var x = Math.floor(Math.random() * BOARD_SIZE_X);
+      var y = Math.floor(Math.random() * BOARD_SIZE_Y);
+
+      if ($scope.board[y][x] === "snake" || $scope.board[y][x] === "chair" || $scope.board[y][x] === "emptyChair" || $scope.board[y][x] === "fruit") {
+        return resetNumFruit(fruit);
+      }
+      fruit.x= x;
+      fruit.y= y;
+      $scope.board[y][x] = "fruit";
+    }
+
 
     function resetChair() {
       var x = Math.floor(Math.random() * CHAIR_X);
@@ -286,6 +308,20 @@ angular.module('ngSnake', [])
         snake.parts.push({x: 10 + i, y: 10});
       }
       resetFruit();
+
+      for (var i=0; i<fruits.length;i++) {
+        resetNumFruit(fruits[i]);
+        
+      }
+
+
+
+
+      
+      console.log(fruits);
+console.log($scope.board);
+
+
       update();
     };
 
