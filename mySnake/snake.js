@@ -143,7 +143,20 @@ angular.module('ngSnake', [])
     }
 
     function chairCollision(part) {
-      return part.x === CHAIR_DX || part.x === CHAIR_DX+CHAIR_X || part.y === CHAIR_DY || part.y === CHAIR_DY+CHAIR_Y;
+      
+      if (part.x === CHAIR_DX || part.x === CHAIR_DX+CHAIR_X-1)
+        if (part.y > CHAIR_DY && part.y < CHAIR_DY + CHAIR_Y)
+          return true;
+        else
+          return false;
+      else if (part.y === CHAIR_DY  || part.y === CHAIR_DY+CHAIR_Y-1)
+        if (part.x > CHAIR_DX && part.x < CHAIR_DX + CHAIR_X)
+          return true;
+        else
+          return false;
+      /*
+      return part.x === CHAIR_DX ? part.y === CHAIR_DY
+          || part.x === CHAIR_DX+CHAIR_X || part.y === CHAIR_DY || part.y === CHAIR_DY+CHAIR_Y;*/
     }
 
     function selfCollision(part) {
@@ -185,6 +198,7 @@ angular.module('ngSnake', [])
       },500);
 
       setupBoard();
+      setupChairs(CHAIR_DX,CHAIR_X,CHAIR_DY,CHAIR_Y);
     }
 
     function setupBoard() {  // ����� �������� ������� � ���� ������, � ����� ����� window ������� �=������ DOM ���������...
