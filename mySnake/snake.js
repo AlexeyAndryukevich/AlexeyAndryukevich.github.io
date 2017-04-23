@@ -142,21 +142,11 @@ angular.module('ngSnake', [])
       return part.x === BOARD_SIZE_X || part.x === -1 || part.y === BOARD_SIZE_Y || part.y === -1;
     }
 
-    function chairCollision(part) {
-      
+    function chairCollision(part) {      
       if (part.x === CHAIR_DX || part.x === CHAIR_DX+CHAIR_X-1)
-        if (part.y > CHAIR_DY && part.y < CHAIR_DY + CHAIR_Y)
-          return true;
-        else
-          return false;
+        return (part.y > CHAIR_DY && part.y < CHAIR_DY + CHAIR_Y);
       else if (part.y === CHAIR_DY  || part.y === CHAIR_DY+CHAIR_Y-1)
-        if (part.x > CHAIR_DX && part.x < CHAIR_DX + CHAIR_X)
-          return true;
-        else
-          return false;
-      /*
-      return part.x === CHAIR_DX ? part.y === CHAIR_DY
-          || part.x === CHAIR_DX+CHAIR_X || part.y === CHAIR_DY || part.y === CHAIR_DY+CHAIR_Y;*/
+        return (part.x > CHAIR_DX && part.x < CHAIR_DX + CHAIR_X);
     }
 
     function selfCollision(part) {
@@ -171,7 +161,7 @@ angular.module('ngSnake', [])
       var x = Math.floor(Math.random() * BOARD_SIZE_X);
       var y = Math.floor(Math.random() * BOARD_SIZE_Y);
 
-      if ($scope.board[y][x] === "snake") {
+      if ($scope.board[y][x] === "snake" || $scope.board[y][x] === "chair") {
         return resetFruit();
       }
       fruit = {x: x, y: y};
