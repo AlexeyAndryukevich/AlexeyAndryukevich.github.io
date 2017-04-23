@@ -65,7 +65,8 @@ angular.module('ngSnake', [])
       SNAKE_HEAD: '#0DFF00', //'#078F00',  // ���� ����� ������ ��� ��� ������� � head
       SNAKE_BODY: '#0DFF00',
       BOARD: '#000',
-      CHAIR: '#0000ee'
+      CHAIR: '#0000ee',
+      EMPTY_CHAIR: "#766f63"
     };
 
     var snake = {
@@ -96,6 +97,8 @@ angular.module('ngSnake', [])
         return COLORS.SNAKE_BODY;
       } else if ($scope.board[col][row] === "chair") {
         return COLORS.CHAIR;
+      } else if ($scope.board[col][row] === "emptyChair") {
+        return COLORS.EMPTY_CHAIR;
       }
       return COLORS.BOARD;
     };
@@ -161,10 +164,23 @@ angular.module('ngSnake', [])
       var x = Math.floor(Math.random() * BOARD_SIZE_X);
       var y = Math.floor(Math.random() * BOARD_SIZE_Y);
 
-      if ($scope.board[y][x] === "snake" || $scope.board[y][x] === "chair") {
+      if ($scope.board[y][x] === "snake" || $scope.board[y][x] === "chair" || $scope.board[y][x] === "emptyChair") {
         return resetFruit();
       }
       fruit = {x: x, y: y};
+
+    }
+
+    function resetChair() {
+      var x = Math.floor(Math.random() * CHAIR_X);
+      var y = Math.floor(Math.random() * CHAIR_Y);
+
+      if ($scope.board[CHAIR_DY + y][CHAIR_DX + x] === "emptyChair") {
+        return resetChair();
+      }
+
+      $scope.board[CHAIR_DY + y][CHAIR_DX + x] = "emptyChair";
+
     }
 
     function eatFruit() {
@@ -174,6 +190,7 @@ angular.module('ngSnake', [])
       var tail = angular.copy(snake.parts[snake.parts.length-1]);
       snake.parts.push(tail);
       resetFruit();
+      resetChair();
 
       if ($scope.score % 5 === 0) {
         interval -= 15;
