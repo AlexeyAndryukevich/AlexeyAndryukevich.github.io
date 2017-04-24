@@ -9,7 +9,7 @@
   
   <body  ng-controller="snakeCtrl">
 
-    <div id="gameContainer">
+    <div ng-cloak id="gameContainer">
       Score: {{score}}
       <div>
           <div class="row" ng-repeat="column in board" ng-style="{height: hgt + 'px'}">
