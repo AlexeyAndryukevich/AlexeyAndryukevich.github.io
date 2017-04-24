@@ -301,7 +301,7 @@ angular.module('ngSnake', [])
       snake = {direction: DIRECTIONS.LEFT, parts: []};
       tempDirection = DIRECTIONS.LEFT;
       isGameOver = false;
-      interval = 100;
+      interval = 200;
 
       // Set up initial snake
       for (var i = 0; i < 5; i++) {
