@@ -8,7 +8,7 @@ angular.module('ngSnake', [])
 
   var CHAIR_DX=10, CHAIR_X=20, CHAIR_DY=20, CHAIR_Y = 20;
 
-  var NUM_OF_FRUITS = 10;
+  var NUM_OF_FRUITS = 5;
 	
   /*
     - сделать области: стулья и т.д.
@@ -16,10 +16,7 @@ angular.module('ngSnake', [])
     - поработать со стилями чтоб Material Desining или похожее 
   */
 	
-	/*
-	$window.resize(function(){
-		
-	});*/
+
       
 	/*     
 		���������� ��� ������ ������� � ������
@@ -27,9 +24,6 @@ angular.module('ngSnake', [])
 	*/
 
 
-  //$scope.hgt = ($window.innerWidth - 20) / BOARD_SIZE_X;
-
-  //if ($window.innerWidth > $window.innerHeight)
 	
   $scope.hgt = ($window.innerHeight - 80) / BOARD_SIZE_Y;
 
@@ -79,10 +73,6 @@ angular.module('ngSnake', [])
       }]
     };
 
-    var fruit = {  // ����� ����� ������
-      x: -1,
-      y: -1
-    };
 
     
     var fruits = [];
@@ -97,8 +87,6 @@ angular.module('ngSnake', [])
     $scope.setStyling = function(col, row) {
       if (isGameOver)  {
         return COLORS.GAME_OVER;
-      } else if (fruit.x == row && fruit.y == col) {
-        return COLORS.FRUIT;
       } else if ($scope.board[col][row] === "snake") {
         return COLORS.SNAKE_BODY;
       } else if ($scope.board[col][row] === "chair") {
@@ -116,8 +104,10 @@ angular.module('ngSnake', [])
 
       if (boardCollision(newHead) || chairCollision(newHead) || selfCollision(newHead)) {
         return gameOver();
+      } else if ($scope.score === CHAIR_X*CHAIR_Y) {
+        return gameOver();
       } else if (fruitCollision(newHead)) {
-        eatFruit();
+        eatFruit(newHead);
       }
 
       // Remove tail
@@ -168,18 +158,7 @@ angular.module('ngSnake', [])
       return $scope.board[part.y][part.x] === "fruit";
     }
 
-    function resetFruit() {
-      var x = Math.floor(Math.random() * BOARD_SIZE_X);
-      var y = Math.floor(Math.random() * BOARD_SIZE_Y);
 
-      if ($scope.board[y][x] === "snake" || $scope.board[y][x] === "chair" || $scope.board[y][x] === "emptyChair") {
-        return resetFruit();
-      }
-      fruit = {x: x, y: y};
-
-    }
-
-    
     function resetNumFruit(fruit) {
       var x = Math.floor(Math.random() * BOARD_SIZE_X);
       var y = Math.floor(Math.random() * BOARD_SIZE_Y);
@@ -205,13 +184,20 @@ angular.module('ngSnake', [])
 
     }
 
-    function eatFruit() {
+    function eatFruit(part) {
       $scope.score++;
       
       // Grow by 1
       var tail = angular.copy(snake.parts[snake.parts.length-1]);
       snake.parts.push(tail);
-      resetFruit();
+
+      for (var i=0;i<fruits.length;i++) {
+        if (part.x === fruits[i].x && part.y === fruits[i].y) {
+          resetNumFruit(fruits[i]);
+          break;
+        }
+      }
+
       resetChair();
 
       if ($scope.score % 5 === 0) {
@@ -229,6 +215,20 @@ angular.module('ngSnake', [])
       setupBoard();
       setupChairs(CHAIR_DX,CHAIR_X,CHAIR_DY,CHAIR_Y);
     }
+
+
+    function wellDone() {
+      alert("WELL DONE!");
+      isGameOver = true;
+
+      $timeout(function() {
+        isGameOver = false;
+      },500);
+
+      setupBoard();
+      setupChairs(CHAIR_DX,CHAIR_X,CHAIR_DY,CHAIR_Y);
+    }
+
 
     function setupBoard() {  // ����� �������� ������� � ���� ������, � ����� ����� window ������� �=������ DOM ���������...
       $scope.board = [];
@@ -307,21 +307,11 @@ angular.module('ngSnake', [])
       for (var i = 0; i < 5; i++) {
         snake.parts.push({x: 10 + i, y: 10});
       }
-      resetFruit();
 
       for (var i=0; i<fruits.length;i++) {
         resetNumFruit(fruits[i]);
-        
-      }
-
-
-
-
-      
-      console.log(fruits);
-console.log($scope.board);
-
-
+        resetChair();        
+      }      
       update();
     };
 
