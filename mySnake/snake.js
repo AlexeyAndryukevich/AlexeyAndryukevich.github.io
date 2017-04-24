@@ -57,12 +57,11 @@ angular.module('ngSnake', [])
 
     var COLORS = {
       GAME_OVER: '#820303',
-      FRUIT: '#E80505',
-      SNAKE_HEAD: '#0DFF00', //'#078F00',  // ���� ����� ������ ��� ��� ������� � head
-      SNAKE_BODY: '#0DFF00',
-      BOARD: '#000',
-      CHAIR: '#0000ee',
-      EMPTY_CHAIR: "#766f63"
+      FRUIT: '#f69c51',      
+      SNAKE_BODY: '#0ece2e',
+      BOARD: '#494D51',
+      CHAIR: '#1474d4',
+      EMPTY_CHAIR: "#4fa7ff"
     };
 
     var snake = {
@@ -105,7 +104,7 @@ angular.module('ngSnake', [])
       if (boardCollision(newHead) || chairCollision(newHead) || selfCollision(newHead)) {
         return gameOver();
       } else if ($scope.score === CHAIR_X*CHAIR_Y) {
-        return gameOver();
+        return wellDone();
       } else if (fruitCollision(newHead)) {
         eatFruit(newHead);
       }
@@ -206,7 +205,9 @@ angular.module('ngSnake', [])
     }
 
     function gameOver() {
+
       isGameOver = true;
+      alert("GAME OVER! Yours score is "+$scope.score+"!");
 
       $timeout(function() {
         isGameOver = false;
@@ -218,8 +219,8 @@ angular.module('ngSnake', [])
 
 
     function wellDone() {
-      alert("WELL DONE!");
       isGameOver = true;
+      alert("WELL DONE!");
 
       $timeout(function() {
         isGameOver = false;
@@ -301,7 +302,7 @@ angular.module('ngSnake', [])
       snake = {direction: DIRECTIONS.LEFT, parts: []};
       tempDirection = DIRECTIONS.LEFT;
       isGameOver = false;
-      interval = 200;
+      interval = 150;
 
       // Set up initial snake
       for (var i = 0; i < 5; i++) {
