@@ -123,8 +123,6 @@ angular.module('ngSnake', [])
 
       if (boardCollision(newHead) || chairCollision(newHead) || stageCollision(newHead) || selfCollision(newHead)) {
         return gameOver();
-      } else if ($scope.score === CHAIR_X*CHAIR_Y) {
-        return wellDone();
       } else if (fruitCollision(newHead)) {
         eatFruit(newHead);
       }
@@ -258,7 +256,7 @@ angular.module('ngSnake', [])
     }
 
 
-    function wellDone() {
+   /* function wellDone() {
       isGameOver = true;
       alert("WELL DONE!");
 
@@ -269,7 +267,7 @@ angular.module('ngSnake', [])
       setupBoard();
       setupChairs(CHAIRS_ARR, "chair");
       setupChairs(STAGE_ARR, "stage");
-    }
+    }*/
 
 
     function setupBoard() {  // ����� �������� ������� � ���� ������, � ����� ����� window ������� �=������ DOM ���������...
