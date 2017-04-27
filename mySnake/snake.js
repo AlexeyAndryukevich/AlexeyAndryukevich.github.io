@@ -16,9 +16,9 @@ angular.module('ngSnake', [])
 
   var BOARD_SIZE_X = prohod+8+prohod+14+prohod+8+prohod, BOARD_SIZE_Y = 10+32+3;
 
-  var CHAIR_DX=10, CHAIR_X=20, CHAIR_DY=20, CHAIR_Y = 20;  // убрать, но без них вырубается змейка, узнать почему
+  //var CHAIR_DX=10, CHAIR_X=20, CHAIR_DY=20, CHAIR_Y = 20;  // убрать, но без них вырубается змейка, узнать почему
 
-  var NUM_OF_FRUITS = 5;
+  var NUM_OF_FRUITS = 10;
 
   var STAGE_ARR = [
     {CHAIR_DX: 10, CHAIR_X: 22, CHAIR_DY: 0, CHAIR_Y: 1},
