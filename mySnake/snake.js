@@ -6,6 +6,14 @@ angular.module('ngSnake', [])
   
   var BOARD_SIZE_X = 40, BOARD_SIZE_Y = 50;
 
+  var CHAIRS_ARR = [
+    {CHAIR_DX: 5, CHAIR_X: 10, CHAIR_DY: 15, CHAIR_Y: 10},
+    {CHAIR_DX: 20, CHAIR_X: 10, CHAIR_DY: 15, CHAIR_Y: 10},
+    {CHAIR_DX: 5, CHAIR_X: 10, CHAIR_DY: 30, CHAIR_Y: 10},
+    {CHAIR_DX: 20, CHAIR_X: 10, CHAIR_DY: 30, CHAIR_Y: 10}    
+  ];
+
+
   var CHAIR_DX=10, CHAIR_X=20, CHAIR_DY=20, CHAIR_Y = 20;
 
   var NUM_OF_FRUITS = 5;
@@ -142,11 +150,24 @@ angular.module('ngSnake', [])
       return part.x === BOARD_SIZE_X || part.x === -1 || part.y === BOARD_SIZE_Y || part.y === -1;
     }
 
-    function chairCollision(part) {      
-      if (part.x === CHAIR_DX || part.x === CHAIR_DX+CHAIR_X-1)
+    function chairCollision(part) {     
+      return $scope.board[part.y][part.x] === "chair" || $scope.board[part.y][part.x] === "emptyChair";
+      
+      
+      /*for(var i=0; i<CHAIRS_ARR.length;i++) {
+        if (part.x === CHAIRS_ARR[i].CHAIR_DX || part.x === CHAIRS_ARR[i].CHAIR_DX+CHAIRS_ARR[i].CHAIR_X-1)          
+          if (part.y >= CHAIRS_ARR[i].CHAIR_DY && part.y <= CHAIRS_ARR[i].CHAIR_DY + CHAIRS_ARR[i].CHAIR_Y-1)
+            return true;
+        if (part.y === CHAIRS_ARR[i].CHAIR_DY  || part.y === CHAIRS_ARR[i].CHAIR_DY+CHAIRS_ARR[i].CHAIR_Y-1)
+          if (part.x >= CHAIRS_ARR[i].CHAIR_DX && part.x <= CHAIRS_ARR[i].CHAIR_DX + CHAIRS_ARR[i].CHAIR_X-1)
+            return true;
+      } 
+      return false;*/
+
+      /*if (part.x === CHAIR_DX || part.x === CHAIR_DX+CHAIR_X-1)
         return (part.y > CHAIR_DY && part.y < CHAIR_DY + CHAIR_Y);
       else if (part.y === CHAIR_DY  || part.y === CHAIR_DY+CHAIR_Y-1)
-        return (part.x > CHAIR_DX && part.x < CHAIR_DX + CHAIR_X);
+        return (part.x > CHAIR_DX && part.x < CHAIR_DX + CHAIR_X);*/
     }
 
     function selfCollision(part) {
@@ -172,14 +193,15 @@ angular.module('ngSnake', [])
 
 
     function resetChair() {
-      var x = Math.floor(Math.random() * CHAIR_X);
-      var y = Math.floor(Math.random() * CHAIR_Y);
+      var i = Math.floor(Math.random() * (CHAIRS_ARR.length-1));
+      var x = Math.floor(Math.random() * CHAIRS_ARR[i].CHAIR_X);
+      var y = Math.floor(Math.random() * CHAIRS_ARR[i].CHAIR_Y);
 
-      if ($scope.board[CHAIR_DY + y][CHAIR_DX + x] === "emptyChair") {
+      if ($scope.board[CHAIRS_ARR[i].CHAIR_DY + y][CHAIRS_ARR[i].CHAIR_DX + x] === "emptyChair") {
         return resetChair();
       }
 
-      $scope.board[CHAIR_DY + y][CHAIR_DX + x] = "emptyChair";
+      $scope.board[CHAIRS_ARR[i].CHAIR_DY + y][CHAIRS_ARR[i].CHAIR_DX + x] = "emptyChair";
 
     }
 
@@ -214,7 +236,7 @@ angular.module('ngSnake', [])
       },500);
 
       setupBoard();
-      setupChairs(CHAIR_DX,CHAIR_X,CHAIR_DY,CHAIR_Y);
+      setupChairs(CHAIRS_ARR);
     }
 
 
@@ -227,7 +249,7 @@ angular.module('ngSnake', [])
       },500);
 
       setupBoard();
-      setupChairs(CHAIR_DX,CHAIR_X,CHAIR_DY,CHAIR_Y);
+      setupChairs(CHAIRS_ARR);
     }
 
 
@@ -242,7 +264,7 @@ angular.module('ngSnake', [])
     }
     setupBoard();
 
-    function setupChairs(dx,x,dy,y) {  // ����� �������� ������� � ���� ������, � ����� ����� window ������� �=������ DOM ���������...
+    /*function setupChairs(dx,x,dy,y) {  // ����� �������� ������� � ���� ������, � ����� ����� window ������� �=������ DOM ���������...
       console.log(dx, dy);
       for (var i = 0; i < y; i++) {
         for (var j = 0; j < x; j++) {
@@ -250,7 +272,18 @@ angular.module('ngSnake', [])
         }
       }
     }
-    setupChairs(CHAIR_DX,CHAIR_X,CHAIR_DY,CHAIR_Y);
+    setupChairs(CHAIR_DX,CHAIR_X,CHAIR_DY,CHAIR_Y);*/
+
+    function setupChairs(arr) {  // ����� �������� ������� � ���� ������, � ����� ����� window ������� �=������ DOM ���������...
+        for (var k=0;k<arr.length;k++) {
+            for (var i = 0; i < arr[k].CHAIR_Y; i++) {
+                for (var j = 0; j < arr[k].CHAIR_X; j++) {
+                  $scope.board[arr[k].CHAIR_DY+j][arr[k].CHAIR_DX+i] = "chair";
+                }
+            }
+        }     
+    }
+    setupChairs(CHAIRS_ARR);
 
     var changeDirection = function(e) { // ���� keyup � ��� ���������� � ����������
       if (e.keyCode == DIRECTIONS.LEFT && snake.direction !== DIRECTIONS.RIGHT) {
@@ -302,11 +335,11 @@ angular.module('ngSnake', [])
       snake = {direction: DIRECTIONS.LEFT, parts: []};
       tempDirection = DIRECTIONS.LEFT;
       isGameOver = false;
-      interval = 150;
+      interval = 50;
 
       // Set up initial snake
       for (var i = 0; i < 5; i++) {
-        snake.parts.push({x: 10 + i, y: 10});
+        snake.parts.push({x: 10 + i, y: 2});
       }
 
       for (var i=0; i<fruits.length;i++) {
