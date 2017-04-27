@@ -3,20 +3,29 @@ angular.module('ngSnake', [])
 
   .controller('snakeCtrl', function ($scope, $timeout, $window) {
 
-  
-  var BOARD_SIZE_X = 40, BOARD_SIZE_Y = 50;
+  var prohod = 3;
+
 
   var CHAIRS_ARR = [
-    {CHAIR_DX: 5, CHAIR_X: 10, CHAIR_DY: 15, CHAIR_Y: 10},
-    {CHAIR_DX: 20, CHAIR_X: 10, CHAIR_DY: 15, CHAIR_Y: 10},
-    {CHAIR_DX: 5, CHAIR_X: 10, CHAIR_DY: 30, CHAIR_Y: 10},
-    {CHAIR_DX: 20, CHAIR_X: 10, CHAIR_DY: 30, CHAIR_Y: 10}    
+    {CHAIR_DX: prohod, CHAIR_X: 8, CHAIR_DY: 10, CHAIR_Y: 32},
+    {CHAIR_DX: prohod+8+prohod, CHAIR_X: 14, CHAIR_DY: 10+2, CHAIR_Y: 18-2},
+    {CHAIR_DX: prohod+8+prohod, CHAIR_X: 14, CHAIR_DY: 10+18+prohod+3, CHAIR_Y: 11-3},
+    {CHAIR_DX: prohod+8+prohod+14+prohod, CHAIR_X: 8, CHAIR_DY: 10, CHAIR_Y: 18},
+    {CHAIR_DX: prohod+8+prohod+14+prohod, CHAIR_X: 8, CHAIR_DY: 10+18+prohod, CHAIR_Y: 11}          
   ];
 
+  var BOARD_SIZE_X = prohod+8+prohod+14+prohod+8+prohod, BOARD_SIZE_Y = 10+32+3;
 
-  var CHAIR_DX=10, CHAIR_X=20, CHAIR_DY=20, CHAIR_Y = 20;
+  var CHAIR_DX=10, CHAIR_X=20, CHAIR_DY=20, CHAIR_Y = 20;  // убрать, но без них вырубается змейка, узнать почему
 
   var NUM_OF_FRUITS = 5;
+
+  var STAGE_ARR = [
+    {CHAIR_DX: 10, CHAIR_X: 22, CHAIR_DY: 0, CHAIR_Y: 1},
+    {CHAIR_DX: 11, CHAIR_X: 20, CHAIR_DY: 1, CHAIR_Y: 1},
+    {CHAIR_DX: 12, CHAIR_X: 18, CHAIR_DY: 2, CHAIR_Y: 1},
+    {CHAIR_DX: 13, CHAIR_X: 16, CHAIR_DY: 3, CHAIR_Y: 1} 
+  ]
 	
   /*
     - сделать области: стулья и т.д.
@@ -69,11 +78,12 @@ angular.module('ngSnake', [])
       SNAKE_BODY: '#0ece2e',
       BOARD: '#494D51',
       CHAIR: '#1474d4',
-      EMPTY_CHAIR: "#4fa7ff"
+      EMPTY_CHAIR: "#4fa7ff",
+      STAGE: '#909090'
     };
 
     var snake = {
-      direction: DIRECTIONS.LEFT,
+      direction: DIRECTIONS.RIGHT,
       parts: [{
         x: -1,
         y: -1
@@ -102,6 +112,8 @@ angular.module('ngSnake', [])
         return COLORS.EMPTY_CHAIR;
       } else if ($scope.board[col][row] === "fruit") {
         return COLORS.FRUIT;
+      } else if ($scope.board[col][row] === "stage") {
+        return COLORS.STAGE;
       }
       return COLORS.BOARD;
     };
@@ -109,7 +121,7 @@ angular.module('ngSnake', [])
     function update() {
       var newHead = getNewHead();
 
-      if (boardCollision(newHead) || chairCollision(newHead) || selfCollision(newHead)) {
+      if (boardCollision(newHead) || chairCollision(newHead) || stageCollision(newHead) || selfCollision(newHead)) {
         return gameOver();
       } else if ($scope.score === CHAIR_X*CHAIR_Y) {
         return wellDone();
@@ -170,6 +182,11 @@ angular.module('ngSnake', [])
         return (part.x > CHAIR_DX && part.x < CHAIR_DX + CHAIR_X);*/
     }
 
+    function stageCollision(part) {
+      return $scope.board[part.y][part.x] === "stage";
+    }
+
+
     function selfCollision(part) {
       return $scope.board[part.y][part.x] === "snake";
     }
@@ -183,7 +200,7 @@ angular.module('ngSnake', [])
       var x = Math.floor(Math.random() * BOARD_SIZE_X);
       var y = Math.floor(Math.random() * BOARD_SIZE_Y);
 
-      if ($scope.board[y][x] === "snake" || $scope.board[y][x] === "chair" || $scope.board[y][x] === "emptyChair" || $scope.board[y][x] === "fruit") {
+      if ($scope.board[y][x] === "snake" || $scope.board[y][x] === "chair" || $scope.board[y][x] === "emptyChair" || $scope.board[y][x] === "stage" || $scope.board[y][x] === "fruit") {
         return resetNumFruit(fruit);
       }
       fruit.x= x;
@@ -221,8 +238,8 @@ angular.module('ngSnake', [])
 
       resetChair();
 
-      if ($scope.score % 5 === 0) {
-        interval -= 15;
+      if ($scope.score % 10 === 0) {
+        interval -= 10;
       }
     }
 
@@ -236,7 +253,8 @@ angular.module('ngSnake', [])
       },500);
 
       setupBoard();
-      setupChairs(CHAIRS_ARR);
+      setupChairs(CHAIRS_ARR, "chair");
+      setupChairs(STAGE_ARR, "stage");
     }
 
 
@@ -249,7 +267,8 @@ angular.module('ngSnake', [])
       },500);
 
       setupBoard();
-      setupChairs(CHAIRS_ARR);
+      setupChairs(CHAIRS_ARR, "chair");
+      setupChairs(STAGE_ARR, "stage");
     }
 
 
@@ -274,16 +293,20 @@ angular.module('ngSnake', [])
     }
     setupChairs(CHAIR_DX,CHAIR_X,CHAIR_DY,CHAIR_Y);*/
 
-    function setupChairs(arr) {  // ����� �������� ������� � ���� ������, � ����� ����� window ������� �=������ DOM ���������...
+    function setupChairs(arr, field) {  // ����� �������� ������� � ���� ������, � ����� ����� window ������� �=������ DOM ���������...
         for (var k=0;k<arr.length;k++) {
             for (var i = 0; i < arr[k].CHAIR_Y; i++) {
                 for (var j = 0; j < arr[k].CHAIR_X; j++) {
-                  $scope.board[arr[k].CHAIR_DY+j][arr[k].CHAIR_DX+i] = "chair";
+                  $scope.board[arr[k].CHAIR_DY+i][arr[k].CHAIR_DX+j] = field;
                 }
             }
         }     
     }
-    setupChairs(CHAIRS_ARR);
+    setupChairs(CHAIRS_ARR, "chair");
+    setupChairs(STAGE_ARR, "stage");
+    
+
+
 
     var changeDirection = function(e) { // ���� keyup � ��� ���������� � ����������
       if (e.keyCode == DIRECTIONS.LEFT && snake.direction !== DIRECTIONS.RIGHT) {
@@ -332,14 +355,14 @@ angular.module('ngSnake', [])
 
     $scope.startGame = function() {
       $scope.score = 0;
-      snake = {direction: DIRECTIONS.LEFT, parts: []};
-      tempDirection = DIRECTIONS.LEFT;
+      snake = {direction: DIRECTIONS.RIGHT, parts: []};
+      tempDirection = DIRECTIONS.RIGHT;
       isGameOver = false;
-      interval = 50;
+      interval = 150;
 
       // Set up initial snake
       for (var i = 0; i < 5; i++) {
-        snake.parts.push({x: 10 + i, y: 2});
+        snake.parts.push({x: 2 - i, y: 4});
       }
 
       for (var i=0; i<fruits.length;i++) {
