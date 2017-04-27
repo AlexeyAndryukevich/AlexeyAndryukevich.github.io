@@ -14,7 +14,7 @@ angular.module('ngSnake', [])
     {CHAIR_DX: prohod+8+prohod+14+prohod, CHAIR_X: 8, CHAIR_DY: 10+18+prohod, CHAIR_Y: 11}          
   ];
 
-  var BOARD_SIZE_X = prohod+8+prohod+14+prohod+8+prohod, BOARD_SIZE_Y = 10+32+3;
+  var BOARD_SIZE_X = prohod+8+prohod+14+prohod+8+prohod, BOARD_SIZE_Y = 10+32+prohod;
 
   //var CHAIR_DX=10, CHAIR_X=20, CHAIR_DY=20, CHAIR_Y = 20;  // убрать, но без них вырубается змейка, узнать почему
 
