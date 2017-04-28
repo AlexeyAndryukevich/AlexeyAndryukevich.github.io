@@ -14,7 +14,7 @@
       <div>
           <div class="row" ng-repeat="column in board" ng-style="{height: hgt + 'px'}">
               <div class="column"
-                  <-- ng-class="setFieldClass($parent.$index, $index)"-->			     
+                  <!-- ng-class="setFieldClass($parent.$index, $index)"-->			     
                   ng-style="{'background-color': setStyling($parent.$index, $index), width: hgt + 'px', height: hgt + 'px'}"
                   ng-repeat="row in column track by $index"
               ></div>
