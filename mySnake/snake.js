@@ -118,6 +118,23 @@ angular.module('ngSnake', [])
       return COLORS.BOARD;
     };
 
+    $scope.setFieldClass = function(col, row) {
+      if (isGameOver)  {
+        return COLORS.GAME_OVER;
+      } else if ($scope.board[col][row] === "snake") {
+        return 'md-whiteframe-2dp';
+      } else if ($scope.board[col][row] === "chair") {
+        return 'md-whiteframe-1dp';
+      } else if ($scope.board[col][row] === "emptyChair") {
+        return 'md-whiteframe-1dp';
+      } else if ($scope.board[col][row] === "fruit") {
+        return 'md-whiteframe-2dp';
+      } else if ($scope.board[col][row] === "stage") {
+        return 'md-whiteframe-3dp';
+      }
+      return 'md-whiteframe-0dp';
+    };
+
     function update() {
       var newHead = getNewHead();
 
