@@ -4,27 +4,43 @@
   <head>
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no;" />
     <!--maximum-scale=1.0,-->
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700,400italic">
     <link rel="stylesheet" type="text/css" href="snake.css">
+    <link rel="stylesheet" href="http://ajax.googleapis.com/ajax/libs/angular_material/1.1.0/angular-material.min.css">
   </head> 
   
   <body  ng-controller="snakeCtrl">
 
     <div ng-cloak id="gameContainer">
-      Score: {{score}}
+      <md-content>Score: {{score}} </md-content>
       <div>
           <div class="row" ng-repeat="column in board" ng-style="{height: hgt + 'px'}">
               <div class="column"
-                  	ng-class="setFieldClass($parent.$index, $index)"		     
+                  		     
                   ng-style="{'background-color': setStyling($parent.$index, $index), width: hgt + 'px', height: hgt + 'px'}"
                   ng-repeat="row in column track by $index"
               ></div>
-            <!-- -->
+            <!-- ng-class="setFieldClass($parent.$index, $index)"	 -->
           </div>
       </div>
-      <div id="startGame" ng-click="startGame()">Start Game</div>
+      <md-button id="startGame" ng-click="startGame()">Start Game</md-button>
     </div>
 
+
+
+
+
+  <!-- Angular Material requires Angular.js Libraries -->
     <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.4/angular.min.js"></script>
+  
+  <script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.6.4/angular-animate.min.js"></script>
+  <script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.6.4/angular-aria.min.js"></script>
+  <script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.6.4/angular-messages.min.js"></script>
+
+  <!-- Angular Material Library -->
+  <script src="http://ajax.googleapis.com/ajax/libs/angular_material/1.1.0/angular-material.min.js"></script>
+
+
     <script src="snake.js"></script>
   </body>
 

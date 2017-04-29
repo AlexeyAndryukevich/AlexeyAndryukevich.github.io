@@ -1,7 +1,26 @@
 
-angular.module('ngSnake', [])
+angular.module('ngSnake', ['ngMaterial'])
 
-  .controller('snakeCtrl', function ($scope, $timeout, $window) {
+  .controller('snakeCtrl', function ($scope, $timeout, $window, $mdDialog) {
+
+$scope.GameOverPopUp = function() {
+    // Appending dialog to document.body to cover sidenav in docs app
+    // Modal dialogs should fully cover application
+    // to prevent interaction outside of dialog
+    $mdDialog.show(
+      $mdDialog.alert()
+        .parent(angular.element(document.querySelector('#popupContainer')))
+        .clickOutsideToClose(true)
+        .title('GAME OVER')
+        .textContent('Your score is ' + $scope.score)
+        .ok('OK')
+    );
+  };
+
+
+
+
+
 
   var prohod = 3;
 
@@ -261,7 +280,7 @@ angular.module('ngSnake', [])
     function gameOver() {
 
       isGameOver = true;
-      alert("GAME OVER! Yours score is "+$scope.score+"!");
+      $scope.GameOverPopUp();
       $scope.score = 0;
 
       $timeout(function() {
