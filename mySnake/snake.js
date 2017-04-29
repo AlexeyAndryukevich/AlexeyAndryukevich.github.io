@@ -360,7 +360,7 @@ $scope.GameOverPopUp = function() {
     }
 
     function touchEnded(e) {
-      e.preventDefault();
+      //e.preventDefault();
         var offsetX = touch.changedTouches[0].clientX - e.changedTouches[0].clientX;
         var offsetY = touch.changedTouches[0].clientY - e.changedTouches[0].clientY;
 
