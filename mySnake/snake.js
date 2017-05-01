@@ -95,10 +95,10 @@ $scope.GameOverPopUp = function() {
       GAME_OVER: '#820303',
       FRUIT: '#f69c51',      
       SNAKE_BODY: '#0ece2e',
-      BOARD: '#909090',
+      BOARD: '#494D51',
       CHAIR: '#1474d4',
       EMPTY_CHAIR: "#4fa7ff",
-      STAGE: '#494D51'
+      STAGE: '#909090'
     };
 
     var snake = {
