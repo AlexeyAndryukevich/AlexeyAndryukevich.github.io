@@ -388,6 +388,12 @@ $scope.GameOverPopUp = function() {
     $window.addEventListener("touchstart", touchCatched, false);
     $window.addEventListener("touchmove", touchEnded, false);
 
+// добавить ф-ю кликк которая вызывает попеременно старт /пауза/продолжить
+// довавить попап вначале с инфо по управлению
+
+
+
+
 
     $scope.startGame = function() {
       $scope.score = 0;
