@@ -24,6 +24,13 @@ $scope.GameOverPopUp = function() {
 
   var prohod = 3;
 
+  var GAME = {
+    STOP: 0,
+    ACTION: 1,
+    PAUSE: 2
+  }
+
+  var GAME_STATE = GAME.STOP;
 
   var CHAIRS_ARR = [
     {CHAIR_DX: prohod, CHAIR_X: 8, CHAIR_DY: 10, CHAIR_Y: 32},
@@ -278,14 +285,14 @@ $scope.GameOverPopUp = function() {
     }
 
     function gameOver() {
-
+      GAME_STATE = GAME.STOP;            
       isGameOver = true;
       $scope.GameOverPopUp();
       $scope.score = 0;
 
       $timeout(function() {
         isGameOver = false;
-      },500);
+      },1000);
 
       setupBoard();
       setupChairs(CHAIRS_ARR, "chair");
@@ -391,11 +398,25 @@ $scope.GameOverPopUp = function() {
 // добавить ф-ю кликк которая вызывает попеременно старт /пауза/продолжить
 // довавить попап вначале с инфо по управлению
 
+    $scope.buttonClick = function() {
+      if(GAME_STATE === GAME.STOP)
+         $scope.startGame();
+      else if (GAME_STATE === GAME.PAUSE)
+         $scope.continueGame();
+      else if (GAME_STATE === GAME.ACTION)
+         $scope.pauseGame();
+    }
 
+    $scope.continueGame = function() {
 
+    }
 
+    $scope.pauseGame = function() {
+
+    }
 
     $scope.startGame = function() {
+      GAME_STATE = GAME.ACTION;      
       $scope.score = 0;
       snake = {direction: DIRECTIONS.RIGHT, parts: []};
       tempDirection = DIRECTIONS.RIGHT;
