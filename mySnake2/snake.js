@@ -7,17 +7,22 @@ $scope.GameOverPopUp = function() {
     // Appending dialog to document.body to cover sidenav in docs app
     // Modal dialogs should fully cover application
     // to prevent interaction outside of dialog
+    
     $mdDialog.show(
       $mdDialog.alert()
         .parent(angular.element(document.querySelector('#popupContainer')))
         .clickOutsideToClose(true)
         .title('GAME OVER')
         .textContent('Your score is ' + $scope.score)
-        .ok('OK')
-    );
+        .ok('OK')         
+    ).then(function() {
+gameOver()   });
   };
 
 
+
+var timer;
+$scope.buttonText = "Start Game";
 
 
 
@@ -165,7 +170,8 @@ $scope.GameOverPopUp = function() {
       var newHead = getNewHead();
 
       if (boardCollision(newHead) || chairCollision(newHead) || stageCollision(newHead) || selfCollision(newHead)) {
-        return gameOver();
+      
+        return $scope.GameOverPopUp();
       } else if (fruitCollision(newHead)) {
         eatFruit(newHead);
       }
@@ -180,7 +186,7 @@ $scope.GameOverPopUp = function() {
 
       // Do it again
       snake.direction = tempDirection;
-      $timeout(update, interval);
+      timer = $timeout(update, interval);
     }
 
     function getNewHead() {
@@ -287,16 +293,18 @@ $scope.GameOverPopUp = function() {
     function gameOver() {
       GAME_STATE = GAME.STOP;            
       isGameOver = true;
-      $scope.GameOverPopUp();
+      //$scope.GameOverPopUp();
       $scope.score = 0;
 
       $timeout(function() {
         isGameOver = false;
-      },1000);
+      },500);
 
       setupBoard();
       setupChairs(CHAIRS_ARR, "chair");
       setupChairs(STAGE_ARR, "stage");
+      $scope.buttonText = "Start game";
+      
     }
 
 
@@ -408,15 +416,29 @@ $scope.GameOverPopUp = function() {
     }
 
     $scope.continueGame = function() {
+      console.log("continue");
+      $scope.buttonText = "Pause";
+      GAME_STATE = GAME.ACTION;
+        $scope.board = JSON.parse(localStorage.getItem('board'));
+        timer = $timeout(update, interval);
 
     }
 
     $scope.pauseGame = function() {
+      console.log("pause");
+      $scope.buttonText = "Continue";
+      $timeout.cancel(timer);
+      GAME_STATE = GAME.PAUSE;
+      localStorage.setItem('board', JSON.stringify($scope.board));
 
     }
 
     $scope.startGame = function() {
+      
+      console.log("start");
+      
       GAME_STATE = GAME.ACTION;      
+      $scope.buttonText = "Pause";
       $scope.score = 0;
       snake = {direction: DIRECTIONS.RIGHT, parts: []};
       tempDirection = DIRECTIONS.RIGHT;
