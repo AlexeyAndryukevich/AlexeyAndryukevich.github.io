@@ -286,7 +286,7 @@ $scope.buttonText = "Start Game";
       resetChair();
 
       if ($scope.score % 10 === 0) {
-        interval -= 10;
+        //interval -= 10; // Саня попросила убрать ускорение
       }
     }
 
