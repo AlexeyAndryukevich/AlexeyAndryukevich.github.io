@@ -41,11 +41,11 @@ $scope.buttonText = "Start Game";
     {CHAIR_DX: prohod-1, CHAIR_X: 8, CHAIR_DY: 10, CHAIR_Y: 32},
     {CHAIR_DX: prohod+8+prohod+1-1, CHAIR_X: 14, CHAIR_DY: 10+2, CHAIR_Y: 18-2},
     {CHAIR_DX: prohod+8+prohod+1-1, CHAIR_X: 14, CHAIR_DY: 10+18+prohod+3, CHAIR_Y: 11-3},
-    {CHAIR_DX: prohod+8+prohod+14+prohod+2-1-1, CHAIR_X: 8, CHAIR_DY: 10, CHAIR_Y: 18},
-    {CHAIR_DX: prohod+8+prohod+14+prohod+2-1-1, CHAIR_X: 8, CHAIR_DY: 10+18+prohod, CHAIR_Y: 11}          
+    {CHAIR_DX: prohod+8+prohod+14+prohod+2-1, CHAIR_X: 8, CHAIR_DY: 10, CHAIR_Y: 18},
+    {CHAIR_DX: prohod+8+prohod+14+prohod+2-1, CHAIR_X: 8, CHAIR_DY: 10+18+prohod, CHAIR_Y: 11}          
   ];
 
-  var BOARD_SIZE_X = prohod+8+prohod+14+prohod+8+prohod+2, BOARD_SIZE_Y = 10+32+prohod;
+  var BOARD_SIZE_X = prohod+8+prohod+14+prohod+8+prohod+2-2, BOARD_SIZE_Y = 10+32+prohod;
 
   //var CHAIR_DX=10, CHAIR_X=20, CHAIR_DY=20, CHAIR_Y = 20;  // убрать, но без них вырубается змейка, узнать почему
 
