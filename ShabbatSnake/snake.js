@@ -35,7 +35,7 @@ angular.module('ngSnake', ['ngMaterial'])
     {CHAIR_DX: 12, CHAIR_X: 18, CHAIR_DY: 2, CHAIR_Y: 1},
     {CHAIR_DX: 13, CHAIR_X: 16, CHAIR_DY: 3, CHAIR_Y: 1} 
   ];    
-  var BOARD_SIZE_X = 42, BOARD_SIZE_Y = 45;
+  var BOARD_SIZE_X = 42, BOARD_SIZE_Y = 44;
 
   $scope.resize = function (){
     $scope.hgt = ($window.innerHeight - 80) / BOARD_SIZE_Y;
