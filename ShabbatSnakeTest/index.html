@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html ng-app='ngSnake' prefix="og: http://ogp.me/ns#">
+
+  <head>    
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+    <meta name="description" content="Classic Snake, that models shabbat dances in Jmachenko hall.">
+    <meta name="keywords" content="Snake, shabbat, dance">
+    <meta name="author" content="Alexey Andryukevich">
+    <meta property="og:title" content='Змейка "Шаббатний хоровод"' />
+    <meta property="og:type" content="website" />
+    <meta property="og:image" content="PostCover.png" />
+		<meta property="og:description" content="Старая добрая змейка, моделирующая шаббатние хороводы на Жмаченко. &#13;&#10;
+    Игра поддерживает все устройства. Для управления на сматрфоне/планшете используйте соответствующие жесты в 
+    любой области экрана, на компьютере - клавиши со стрелками." />
+    
+    <title>Змейка "Шаббатний хоровод"</title>
+
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700,400italic">
+    <link rel="stylesheet" type="text/css" href="snake.css">
+    <link rel="stylesheet" href="https://ajax.googleapis.com/ajax/libs/angular_material/1.1.0/angular-material.min.css">
+    <link rel="image_src" href="PostCover.png"/>
+  </head>  
+  <body ng-controller="snakeCtrl">    
+    <div ng-cloak id="gameContainer">
+      <md-content class="col">Current score: {{currentScore}}</md-content>
+      <md-content class="col logo">Shabbat Snake</md-content>          
+      <md-content class="col">Best score: {{bestScore}}</md-content>
+
+      <div ng-repeat="column in board" ng-style="{height: hgt + 'px'}">
+        <div class="col"                  		     
+          ng-style="{'background-color': setStyling($parent.$index, $index), width: hgt + 'px', height: hgt + 'px'}"
+          ng-repeat="row in column track by $index"
+        ></div>
+      </div>
+
+      <md-button id="startGame" ng-click="buttonClick()">{{buttonText}}</md-button>
+    </div>
+
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.4/angular.min.js"></script>  
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.4/angular-animate.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.4/angular-aria.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/angular_material/1.1.1/angular-material.min.js"></script>
+    <script src="snake.js"></script>
+  </body>
+</html>
