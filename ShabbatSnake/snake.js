@@ -1,10 +1,3 @@
-/*
-  Планы:
-  - ng-repeat красиво, но из-за кучи вотчеров страдает производительность на слабых устройствах, можно переделать через массив DOM элементов для понижения ресурсоемкости;
-  - сделать best score;
-  - сделать жизни;
-*/
-
 angular.module('ngSnake', ['ngMaterial'])
 
 .controller('snakeCtrl', function ($scope, $timeout, $window, $mdDialog) {
@@ -203,7 +196,7 @@ angular.module('ngSnake', ['ngMaterial'])
 
     resetChair();
 
-    if ($scope.score % 5 === 0) {
+    if ($scope.score % 10 === 0) {
       interval -= 5; 
     }
   }
