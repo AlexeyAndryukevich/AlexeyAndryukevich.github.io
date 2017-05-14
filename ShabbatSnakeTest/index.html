@@ -23,9 +23,8 @@
   </head>  
   <body ng-controller="snakeCtrl">    
     <div ng-cloak id="gameContainer">
-      <md-content class="col">Current score: {{currentScore}}</md-content>
-      <md-content class="col logo">Shabbat Snake</md-content>          
-      <md-content class="col">Best score: {{bestScore}}</md-content>
+      <md-content class="col right">Current score: {{currentScore}}</md-content>               
+      <md-content class="col left">Best score: {{bestScore}}</md-content>
 
       <div ng-repeat="column in board" ng-style="{height: hgt + 'px'}">
         <div class="col"                  		     
