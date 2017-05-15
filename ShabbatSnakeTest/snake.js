@@ -8,12 +8,25 @@ angular.module('ngSnake', ['ngMaterial'])
         .parent(angular.element(document.querySelector('#popupContainer')))
         .clickOutsideToClose(true)
         .title('GAME OVER')
-        .textContent('Your score is ' + $scope.currentScore)
+        .textContent(checkBestScore($scope.currentScore))
         .ok('OK')         
     ).then(function() {
       gameOver();
     });
   };     
+
+  checkBestScore = function(score) {
+    if ($scope.currentScore > $scope.bestScore) {
+      $scope.bestScore = $scope.currentScore;
+      window.localStorage["bestScore"] = JSON.stringify($scope.bestScore);
+      return "Congrats! You set new best score: " + $scope.bestScore + "!";
+    } else if ($scope.bestScore - $scope.currentScore < 0.05 * $scope.bestScore) {
+      return "You are so close to set new best score! \n\r" + "You lack the score " + ($scope.bestScore - $scope.currentScore + 1);
+    } else {
+      return "Your score is" + $scope.currentScore;
+    }
+  }
+  
 
   var GAME = {
     STOP: 0,
@@ -81,9 +94,20 @@ angular.module('ngSnake', ['ngMaterial'])
 
   var interval, tempDirection, isGameOver, timer, myBoard;
 
-  $scope.currentScore = 0;
-  $scope.bestScore = 0;  
   $scope.buttonText = "Start Game";
+  $scope.currentScore = 0;
+  $scope.bestScore = ((window.localStorage["bestScore"]) === undefined) ? 0 : JSON.parse(window.localStorage["bestScore"]);
+
+  console.log(window.localStorage["bestScore"]);
+
+/*
+  var temp = JSON.parse(window.localStorage["bestScore"])
+  window.localStorage["bestScore"] = JSON.stringify(_data, val);
+*/
+
+
+
+
 
   $scope.setStyling = function(col, row) {
     if (isGameOver)  {
@@ -206,6 +230,8 @@ angular.module('ngSnake', ['ngMaterial'])
     GAME_STATE = GAME.STOP;            
     isGameOver = true;
     $scope.currentScore = 0;
+
+
     $timeout(function() {
       isGameOver = false;
     },500);
