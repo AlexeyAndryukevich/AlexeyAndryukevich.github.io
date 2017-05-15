@@ -3,3 +3,5 @@ require "json"
 require "open-uri"
 
 gemspec
+
+gem 'jekyll-seo-tag'
