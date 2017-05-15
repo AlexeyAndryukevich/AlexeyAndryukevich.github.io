@@ -3,13 +3,13 @@
 }
 
 #gameContainer, #pastScores {
-  float: left;
-  width: 100%;
-  text-align: center;
+	float: left;
+	width: 100%;
+	text-align: center;
 }
 
 body {
-  overflow-y: hidden; /* To disable android's chrome pull-down-to-refresh feature*/
+	overflow-y: hidden; /* To disable android's chrome pull-down-to-refresh feature*/
 }
 
 .align {
@@ -36,6 +36,12 @@ body {
 	display: inline-block;
 }
 
+.logo {
+	font-family: "SegoePrintRegular";
+	font-size: 1.8em;
+	line-height: 1.1;
+}
+
 #startGame {
 	width: 120px;
 	padding: 2px;
@@ -48,4 +54,14 @@ body {
 
 #startGame:hover {
 	cursor: pointer;
+}
+
+@font-face {
+	font-family: "SegoePrintRegular";
+	src: url("fonts/SegoePrintRegular/SegoePrintRegular.eot");
+	src: url("fonts/SegoePrintRegular/SegoePrintRegular.eot?#iefix")format("embedded-opentype"),
+	url("fonts/SegoePrintRegular/SegoePrintRegular.woff") format("woff"),
+	url("fonts/SegoePrintRegular/SegoePrintRegular.ttf") format("truetype");
+	font-style: normal;
+	font-weight: normal;
 }
