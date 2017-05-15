@@ -19,14 +19,13 @@ angular.module('ngSnake', ['ngMaterial'])
     if ($scope.currentScore > $scope.bestScore) {
       $scope.bestScore = $scope.currentScore;
       window.localStorage["bestScore"] = JSON.stringify($scope.bestScore);
-      return "Congrats! You set new best score: " + $scope.bestScore + "!";
-    } else if ($scope.bestScore - $scope.currentScore < 0.05 * $scope.bestScore) {
-      return "You are so close to set new best score! \n\r" + "You lack the score " + ($scope.bestScore - $scope.currentScore + 1);
+      return "Congrats! You've set a new best score: " + $scope.bestScore + "!";
+    } else if ($scope.bestScore - $scope.currentScore <= 5) {
+      return "You are so close to set new best score! " + "You lack " + ($scope.bestScore - $scope.currentScore + 1) + " points! Try again!";
     } else {
-      return "Your score is" + $scope.currentScore;
+      return "Your score is " + $scope.currentScore;
     }
-  }
-  
+  }  
 
   var GAME = {
     STOP: 0,
@@ -96,7 +95,9 @@ angular.module('ngSnake', ['ngMaterial'])
 
   $scope.buttonText = "Start Game";
   $scope.currentScore = 0;
-  $scope.bestScore = ((window.localStorage["bestScore"]) === undefined) ? 0 : JSON.parse(window.localStorage["bestScore"]);
+  if (window.localStorage["bestScore"] === undefined)
+    window.localStorage["bestScore"] = JSON.stringify(0);
+  $scope.bestScore = JSON.parse(window.localStorage["bestScore"]);
 
   console.log(window.localStorage["bestScore"]);
 
