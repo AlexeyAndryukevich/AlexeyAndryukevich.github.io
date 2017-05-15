@@ -39,7 +39,8 @@ body {
 .logo {
 	font-family: "SegoePrintRegular";
 	font-size: 1.8em;
-	line-height: 1.1;
+	line-height: 1;
+	margin-top: 5px;
 }
 
 #startGame {
