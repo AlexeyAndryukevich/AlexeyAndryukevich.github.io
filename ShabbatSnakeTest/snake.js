@@ -21,7 +21,7 @@ angular.module('ngSnake', ['ngMaterial'])
       window.localStorage["bestScore"] = JSON.stringify($scope.bestScore);
       return "Congrats! You've set a new best score: " + $scope.bestScore + "!";
     } else if ($scope.bestScore - $scope.currentScore <= 5) {
-      return "You are so close to set new best score! " + "You lack " + ($scope.bestScore - $scope.currentScore + 1) + " points! Try again!";
+      return "Nice try! You are so close to set new best score. " + "You lack " + ($scope.bestScore - $scope.currentScore + 1) + " points. Try again!";
     } else {
       return "Your score is " + $scope.currentScore;
     }
