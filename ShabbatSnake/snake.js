@@ -212,7 +212,7 @@ angular.module('ngSnake', ['ngMaterial'])
     resetChair();
 
     if ($scope.currentScore % 10 === 0) {
-      //interval -= 5; 
+      interval -= 5; 
     }
   }
 
@@ -328,7 +328,7 @@ angular.module('ngSnake', ['ngMaterial'])
     snake = {direction: DIRECTIONS.RIGHT, parts: []};
     tempDirection = DIRECTIONS.RIGHT;
     isGameOver = false;
-    interval = 200;
+    interval = 175;
 
     // Set up initial snake
     for (var i = 0; i < 5; i++) {
