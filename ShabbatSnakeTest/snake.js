@@ -13,7 +13,7 @@ angular.module('ngSnake', ['ngMaterial'])
     ).then(function() {
       gameOver();
     });
-  };     
+  };
 
   var GAME = {
     STOP: 0,
@@ -27,7 +27,7 @@ angular.module('ngSnake', ['ngMaterial'])
     {CHAIR_DX: 14, CHAIR_X: 14, CHAIR_DY: 12, CHAIR_Y: 18-2},
     {CHAIR_DX: 14, CHAIR_X: 14, CHAIR_DY: 34, CHAIR_Y: 11-3},
     {CHAIR_DX: 32, CHAIR_X:  8, CHAIR_DY: 10, CHAIR_Y: 18},
-    {CHAIR_DX: 32, CHAIR_X:  8, CHAIR_DY: 31, CHAIR_Y: 11}          
+    {CHAIR_DX: 32, CHAIR_X:  8, CHAIR_DY: 31, CHAIR_Y: 11}
   ];
   var STAGE_ARR = [
     {CHAIR_DX: 10, CHAIR_X: 22, CHAIR_DY: 0, CHAIR_Y: 1},
@@ -43,7 +43,7 @@ angular.module('ngSnake', ['ngMaterial'])
       $scope.hgt = ($window.innerWidth - 20) / BOARD_SIZE_X;
     }
   }	
-  $scope.resize();    
+  $scope.resize();
   angular.element($window).on('resize', function() {
     $scope.$apply($scope.resize);
   });
@@ -57,7 +57,7 @@ angular.module('ngSnake', ['ngMaterial'])
 
   var COLORS = {
     GAME_OVER: '#820303',
-    FRUIT: '#f69c51',      
+    FRUIT: '#f69c51',
     SNAKE_BODY: '#0ece2e',
     BOARD: '#494D51',
     CHAIR: '#1474d4',
@@ -82,7 +82,7 @@ angular.module('ngSnake', ['ngMaterial'])
   var interval, tempDirection, isGameOver, timer, myBoard;
 
   $scope.currentScore = 0;
-  $scope.bestScore = 0;  
+  $scope.bestScore = 0;
   $scope.buttonText = "Start Game";
 
   $scope.setStyling = function(col, row) {
@@ -203,7 +203,7 @@ angular.module('ngSnake', ['ngMaterial'])
   }
 
   function gameOver() {
-    GAME_STATE = GAME.STOP;            
+    GAME_STATE = GAME.STOP;
     isGameOver = true;
     $scope.currentScore = 0;
     $timeout(function() {
@@ -212,10 +212,10 @@ angular.module('ngSnake', ['ngMaterial'])
     setupBoard();
     setupField(CHAIRS_ARR, "chair");
     setupField(STAGE_ARR, "stage");
-    $scope.buttonText = "Start game";      
+    $scope.buttonText = "Start game";
   }
 
-  function setupBoard() { 
+  function setupBoard() {
     $scope.board = [];
     for (var i = 0; i < BOARD_SIZE_Y; i++) {
       $scope.board[i] = [];
@@ -224,16 +224,16 @@ angular.module('ngSnake', ['ngMaterial'])
       }
     }
   }
-  setupBoard();   
+  setupBoard();
 
-  function setupField(arr, field) {  
+  function setupField(arr, field) {
     for (var k=0;k<arr.length;k++) {
       for (var i = 0; i < arr[k].CHAIR_Y; i++) {
         for (var j = 0; j < arr[k].CHAIR_X; j++) {
           $scope.board[arr[k].CHAIR_DY+i][arr[k].CHAIR_DX+j] = field;
         }
       }
-    }     
+    }
   }
   setupField(CHAIRS_ARR, "chair");
   setupField(STAGE_ARR, "stage");
@@ -302,11 +302,11 @@ angular.module('ngSnake', ['ngMaterial'])
     $scope.buttonText = "Continue";
     $timeout.cancel(timer);
     GAME_STATE = GAME.PAUSE;
-    myBoard = JSON.stringify($scope.board);    
+    myBoard = JSON.stringify($scope.board);
   }
 
-  $scope.startGame = function() {      
-    GAME_STATE = GAME.ACTION;      
+  $scope.startGame = function() {
+    GAME_STATE = GAME.ACTION;
     $scope.buttonText = "Pause";
     $scope.currentScore = 0;
     snake = {direction: DIRECTIONS.RIGHT, parts: []};
@@ -321,8 +321,8 @@ angular.module('ngSnake', ['ngMaterial'])
 
     for (var i=0; i<fruits.length;i++) {
       resetNumFruit(fruits[i]);
-      resetChair();        
-    }      
+      resetChair();
+    }
     update();
   };
 });
