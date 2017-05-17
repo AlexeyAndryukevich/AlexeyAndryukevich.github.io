@@ -8,12 +8,24 @@ angular.module('ngSnake', ['ngMaterial'])
         .parent(angular.element(document.querySelector('#popupContainer')))
         .clickOutsideToClose(true)
         .title('GAME OVER')
-        .textContent('Your score is ' + $scope.score)
+        .textContent(checkBestScore($scope.currentScore))
         .ok('OK')         
     ).then(function() {
       gameOver();
     });
   };     
+
+  checkBestScore = function(score) {
+    if ($scope.currentScore > $scope.bestScore) {
+      $scope.bestScore = $scope.currentScore;
+      window.localStorage["bestScore"] = JSON.stringify($scope.bestScore);
+      return "Congrats! You've set a new best score: " + $scope.bestScore + "!";
+    } else if ($scope.bestScore - $scope.currentScore <= 5) {
+      return "Nice try! You are so close to set new best score. " + "You lack " + ($scope.bestScore - $scope.currentScore + 1) + " points. Try again!";
+    } else {
+      return "Your score is " + $scope.currentScore;
+    }
+  }  
 
   var GAME = {
     STOP: 0,
@@ -38,7 +50,7 @@ angular.module('ngSnake', ['ngMaterial'])
   var BOARD_SIZE_X = 42, BOARD_SIZE_Y = 44;
 
   $scope.resize = function (){
-    $scope.hgt = ($window.innerHeight - 80) / BOARD_SIZE_Y;
+    $scope.hgt = ($window.innerHeight - 115) / BOARD_SIZE_Y;
     if ($scope.hgt * BOARD_SIZE_X > $window.innerWidth -20) {
       $scope.hgt = ($window.innerWidth - 20) / BOARD_SIZE_X;
     }
@@ -81,8 +93,11 @@ angular.module('ngSnake', ['ngMaterial'])
 
   var interval, tempDirection, isGameOver, timer, myBoard;
 
-  $scope.score = 0;
   $scope.buttonText = "Start Game";
+  $scope.currentScore = 0;
+  if (window.localStorage["bestScore"] === undefined)
+    window.localStorage["bestScore"] = JSON.stringify(0);
+  $scope.bestScore = JSON.parse(window.localStorage["bestScore"]);
 
   $scope.setStyling = function(col, row) {
     if (isGameOver)  {
@@ -182,7 +197,7 @@ angular.module('ngSnake', ['ngMaterial'])
   }
 
   function eatFruit(part) {
-    $scope.score++;  
+    $scope.currentScore++;  
 
     var tail = angular.copy(snake.parts[snake.parts.length-1]);
     snake.parts.push(tail);
@@ -196,7 +211,7 @@ angular.module('ngSnake', ['ngMaterial'])
 
     resetChair();
 
-    if ($scope.score % 10 === 0) {
+    if ($scope.currentScore % 10 === 0) {
       interval -= 5; 
     }
   }
@@ -204,7 +219,9 @@ angular.module('ngSnake', ['ngMaterial'])
   function gameOver() {
     GAME_STATE = GAME.STOP;            
     isGameOver = true;
-    $scope.score = 0;
+    $scope.currentScore = 0;
+
+
     $timeout(function() {
       isGameOver = false;
     },500);
@@ -307,11 +324,11 @@ angular.module('ngSnake', ['ngMaterial'])
   $scope.startGame = function() {      
     GAME_STATE = GAME.ACTION;      
     $scope.buttonText = "Pause";
-    $scope.score = 0;
+    $scope.currentScore = 0;
     snake = {direction: DIRECTIONS.RIGHT, parts: []};
     tempDirection = DIRECTIONS.RIGHT;
     isGameOver = false;
-    interval = 150;
+    interval = 175;
 
     // Set up initial snake
     for (var i = 0; i < 5; i++) {
