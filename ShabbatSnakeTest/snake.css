@@ -57,6 +57,13 @@ body {
 	cursor: pointer;
 }
 
+.volume {
+    position: fixed;
+    right: 0;
+    top: 0;
+}
+
+
 @font-face {
 	font-family: "SegoePrintRegular";
 	src: url("fonts/SegoePrintRegular/SegoePrintRegular.eot");
