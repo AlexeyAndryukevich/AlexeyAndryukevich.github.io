@@ -24,9 +24,10 @@
     <link rel="image_src" href="PostCover.png"/>
   </head>  
   <body ng-controller="snakeCtrl">
+    <audio id="myAudio" src="Audio/Audio.mp3" loop></audio>
     <div ng-cloak id="gameContainer">
       <div class="center" ng-style="{width: hgt*40 + 'px'}">
-      <img src="Audio/Volume.png" alt="Sound" class="volume">
+        <img id="volumeCtrl" src="Audio/Volume.png" alt="Sound" class="volume" ng-click="volumeCtrl()">
         <div class="logo">Shabbat Snake</div>
         <div class="col left" ng-style="{width: hgt*19 + 'px'}">Current score: {{currentScore}}</div>               
         <div class="col right" ng-style="{width: hgt*19 + 'px'}">Best score: {{bestScore}}</div>

@@ -99,17 +99,6 @@ angular.module('ngSnake', ['ngMaterial'])
     window.localStorage["bestScore"] = JSON.stringify(0);
   $scope.bestScore = JSON.parse(window.localStorage["bestScore"]);
 
-  console.log(window.localStorage["bestScore"]);
-
-/*
-  var temp = JSON.parse(window.localStorage["bestScore"])
-  window.localStorage["bestScore"] = JSON.stringify(_data, val);
-*/
-
-
-
-
-
   $scope.setStyling = function(col, row) {
     if (isGameOver)  {
       return COLORS.GAME_OVER;
@@ -349,5 +338,18 @@ angular.module('ngSnake', ['ngMaterial'])
       resetChair();        
     }      
     update();
+  };
+
+  $scope.volumeCtrl = function() {
+    var oAudio = document.getElementById('myAudio');
+    var btn = document.getElementById('volumeCtrl'); 
+   
+    if (oAudio.paused) {
+      oAudio.play();
+      btn.src="Audio/Volume.png";
+    } else {
+      oAudio.pause();
+      btn.src="Audio/Mute.png";
+    }
   };
 });
