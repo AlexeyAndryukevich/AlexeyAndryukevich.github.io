@@ -22,7 +22,7 @@ angular.module('ngSnake', ['ngMaterial'])
       $scope.bestScore = $scope.currentScore;
       window.localStorage["bestScore"] = JSON.stringify($scope.bestScore);
       return "Congrats! You've set a new best score: " + $scope.bestScore + "!";
-    } else if ($scope.bestScore - $scope.currentScore <= 5) {
+    } else if ($scope.bestScore - $scope.currentScore < 5) {
       return "Nice try! You are so close to set new best score. " + "You lack " + ($scope.bestScore - $scope.currentScore + 1) + " points. Try again!";
     } else {
       return "Your score is " + $scope.currentScore;
@@ -104,6 +104,16 @@ angular.module('ngSnake', ['ngMaterial'])
   var oAudio = document.getElementById('myAudio');
   var btnAudio = document.getElementById('volumeCtrl');
   $scope.showAudioBtn = false; 
+
+  var AUDIO = {
+    PLAY: 0,
+    PAUSE: 1
+  };
+
+  if (window.localStorage["audioState"] === undefined)
+    window.localStorage["audioState"] = JSON.stringify(AUDIO.PLAY);
+  
+  var AUDIO_STATE = JSON.parse(window.localStorage["audioState"]);
 
   $scope.setStyling = function(col, row) {
     if (isGameOver)  {
@@ -314,7 +324,8 @@ angular.module('ngSnake', ['ngMaterial'])
   $scope.continueGame = function() {
     $scope.buttonText = "Pause";
     GAME_STATE = GAME.ACTION;
-    oAudio.play(); 
+    if (AUDIO_STATE === AUDIO.PLAY)
+      oAudio.play(); 
     $scope.showAudioBtn = true;    
     $scope.board = JSON.parse(myBoard);
     timer = $timeout(update, interval);
@@ -330,9 +341,10 @@ angular.module('ngSnake', ['ngMaterial'])
   }
 
   $scope.startGame = function() {      
-    GAME_STATE = GAME.ACTION;     
+    GAME_STATE = GAME.ACTION; 
     $scope.showAudioBtn = true;
-    oAudio.play(); 
+    if (AUDIO_STATE === AUDIO.PLAY)
+      oAudio.play(); 
     $scope.buttonText = "Pause";
     $scope.currentScore = 0;
     snake = {direction: DIRECTIONS.RIGHT, parts: []};
@@ -356,9 +368,13 @@ angular.module('ngSnake', ['ngMaterial'])
     if (oAudio.paused) {
       oAudio.play();
       btnAudio.src="Audio/Volume.png";
+      AUDIO_STATE = AUDIO.PLAY; 
+      window.localStorage["audioState"] = JSON.stringify(AUDIO_STATE);
     } else {
       oAudio.pause();
       btnAudio.src="Audio/Mute.png";
+      AUDIO_STATE = AUDIO.PAUSE; 
+      window.localStorage["audioState"] = JSON.stringify(AUDIO_STATE);
     }
   };
 });
