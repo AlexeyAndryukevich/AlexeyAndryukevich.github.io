@@ -115,6 +115,8 @@ angular.module('ngSnake', ['ngMaterial'])
   
   var AUDIO_STATE = JSON.parse(window.localStorage["audioState"]);
 
+  btnAudio.src = AUDIO_STATE === AUDIO.PLAY ? "Audio/Volume.png" : "Audio/Mute.png";
+
   $scope.setStyling = function(col, row) {
     if (isGameOver)  {
       return COLORS.GAME_OVER;
