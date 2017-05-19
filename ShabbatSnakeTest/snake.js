@@ -3,6 +3,8 @@ angular.module('ngSnake', ['ngMaterial'])
 .controller('snakeCtrl', function ($scope, $timeout, $window, $mdDialog) {
 
   $scope.GameOverPopUp = function() { 
+    oAudio.pause();
+    $scope.showAudioBtn = false;  
     $mdDialog.show(
       $mdDialog.alert()
         .parent(angular.element(document.querySelector('#popupContainer')))
@@ -98,6 +100,10 @@ angular.module('ngSnake', ['ngMaterial'])
   if (window.localStorage["bestScore"] === undefined)
     window.localStorage["bestScore"] = JSON.stringify(0);
   $scope.bestScore = JSON.parse(window.localStorage["bestScore"]);
+
+  var oAudio = document.getElementById('myAudio');
+  var btnAudio = document.getElementById('volumeCtrl');
+  $scope.showAudioBtn = false; 
 
   $scope.setStyling = function(col, row) {
     if (isGameOver)  {
@@ -217,7 +223,7 @@ angular.module('ngSnake', ['ngMaterial'])
   }
 
   function gameOver() {
-    GAME_STATE = GAME.STOP;            
+    GAME_STATE = GAME.STOP;          
     isGameOver = true;
     $scope.currentScore = 0;
     $timeout(function() {
@@ -308,19 +314,25 @@ angular.module('ngSnake', ['ngMaterial'])
   $scope.continueGame = function() {
     $scope.buttonText = "Pause";
     GAME_STATE = GAME.ACTION;
-      $scope.board = JSON.parse(myBoard);
-      timer = $timeout(update, interval);
+    oAudio.play(); 
+    $scope.showAudioBtn = true;    
+    $scope.board = JSON.parse(myBoard);
+    timer = $timeout(update, interval);
   }
 
   $scope.pauseGame = function() {
     $scope.buttonText = "Continue";
     $timeout.cancel(timer);
+    oAudio.pause(); 
+    $scope.showAudioBtn = false;    
     GAME_STATE = GAME.PAUSE;
     myBoard = JSON.stringify($scope.board);    
   }
 
   $scope.startGame = function() {      
-    GAME_STATE = GAME.ACTION;      
+    GAME_STATE = GAME.ACTION;     
+    $scope.showAudioBtn = true;
+    oAudio.play(); 
     $scope.buttonText = "Pause";
     $scope.currentScore = 0;
     snake = {direction: DIRECTIONS.RIGHT, parts: []};
@@ -341,15 +353,12 @@ angular.module('ngSnake', ['ngMaterial'])
   };
 
   $scope.volumeCtrl = function() {
-    var oAudio = document.getElementById('myAudio');
-    var btn = document.getElementById('volumeCtrl'); 
-   
     if (oAudio.paused) {
       oAudio.play();
-      btn.src="Audio/Volume.png";
+      btnAudio.src="Audio/Volume.png";
     } else {
       oAudio.pause();
-      btn.src="Audio/Mute.png";
+      btnAudio.src="Audio/Mute.png";
     }
   };
 });
