@@ -271,13 +271,13 @@ angular.module('ngSnake', ['ngMaterial'])
   setupField(STAGE_ARR, "stage");
 
   var changeDirection = function(e) { 
-    if (e.keyCode == DIRECTIONS.LEFT && snake.direction !== DIRECTIONS.RIGHT) {
+    if (e.keyCode === DIRECTIONS.LEFT && snake.direction !== DIRECTIONS.RIGHT) {
       tempDirection = DIRECTIONS.LEFT;
-    } else if (e.keyCode == DIRECTIONS.UP && snake.direction !== DIRECTIONS.DOWN) {
+    } else if (e.keyCode === DIRECTIONS.UP && snake.direction !== DIRECTIONS.DOWN) {
       tempDirection = DIRECTIONS.UP;
-    } else if (e.keyCode == DIRECTIONS.RIGHT && snake.direction !== DIRECTIONS.LEFT) {
+    } else if (e.keyCode === DIRECTIONS.RIGHT && snake.direction !== DIRECTIONS.LEFT) {
       tempDirection = DIRECTIONS.RIGHT;
-    } else if (e.keyCode == DIRECTIONS.DOWN && snake.direction !== DIRECTIONS.UP) {
+    } else if (e.keyCode === DIRECTIONS.DOWN && snake.direction !== DIRECTIONS.UP) {
       tempDirection = DIRECTIONS.DOWN;
     }
   };
@@ -380,4 +380,4 @@ angular.module('ngSnake', ['ngMaterial'])
       window.localStorage["audioState"] = JSON.stringify(AUDIO_STATE);
     }
   };
-});
+});-
