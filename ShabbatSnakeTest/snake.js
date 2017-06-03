@@ -283,6 +283,7 @@ angular.module('ngSnake', ['ngMaterial'])
   };
 
   function touchCatched(e) {
+    e.preventDefault();
     touch = e;
   }
 
