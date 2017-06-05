@@ -380,4 +380,4 @@ angular.module('ngSnake', ['ngMaterial'])
       window.localStorage["audioState"] = JSON.stringify(AUDIO_STATE);
     }
   };
-});-
+});
