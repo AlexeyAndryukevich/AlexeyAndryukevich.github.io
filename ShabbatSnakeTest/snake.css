@@ -61,6 +61,7 @@ body {
     position: fixed;
     right: 0;
     top: 0;
+	border-style: none;
 }
 
 @font-face {
