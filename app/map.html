@@ -1,0 +1,37 @@
+<!-- AIzaSyA4wIwED__3yvv6KmLNdfqSlYqpris71fM -->
+
+<!DOCTYPE html>
+<html>
+  <head>
+    <style>
+      #map {
+        height: 600px;
+        width: 100%;
+       }
+    </style>
+  </head>
+  <body>
+    <h3>My Google Maps Demo</h3>
+    <div id="map"></div>
+    <p>
+        Lorem ipsum dolor sit amet consectetur adipisicing elit. Adipisci distinctio aliquid quisquam voluptates. Fugit consequatur veniam dicta esse voluptatibus, soluta eius sapiente eligendi repudiandae, ad distinctio architecto quibusdam perspiciatis facilis.
+    </p>
+    <script>
+      function initMap() {
+        var uluru = {lat: 50.452, lng: 30.715};
+        var map = new google.maps.Map(document.getElementById('map'), {
+          zoom: 10,
+          center: uluru,
+          //gestureHandling: 'cooperative'
+        });
+        // var marker = new google.maps.Marker({
+        //   position: uluru,
+        //   map: map
+        // });
+      }
+    </script>
+    <script async defer
+    src="https://maps.googleapis.com/maps/api/js?key=AIzaSyA4wIwED__3yvv6KmLNdfqSlYqpris71fM&callback=initMap">
+    </script>
+  </body>
+</html>
