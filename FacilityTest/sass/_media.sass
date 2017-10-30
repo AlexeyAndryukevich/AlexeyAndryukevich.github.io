@@ -1,0 +1,437 @@
+@import "bourbon"
+
+/*==========  Desktop First Method  ==========*/
+
+/* Large Devices, Wide Screens */
+@media only screen and (max-width : 1200px)
+
+	.container
+		padding: 0 15px
+
+	.f-slider-wrap
+		margin-bottom: 35px
+		.full-slider
+			height: 690px
+			.owl-dots
+				bottom: 28px
+			.f-slide
+				&-bg
+					height: 690px
+				&-content
+					.f-slide-header
+						font-size: em(45px, $def-fz)
+						margin-top: 84px
+					p
+						margin-top: 16px
+
+	.f-slider-nav
+		.f-slider-prev, .f-slider-next 
+			top: -370px
+
+	.m-slider-wrap
+		margin-top: 10px
+
+	.m-slider-nav
+		height: 94px
+		.m-slider-prev, .m-slider-next 
+			top: 35px			
+		.m-slider-prev 
+			left: 390px
+		.m-slider-next 
+			right: 390px
+
+	.columns
+		margin-top: 10px
+		margin-bottom: 18px
+		.column-item
+			margin-left: 10px
+			margin-right: 10px
+
+	.acticle
+		h3
+			font-size: em(14px, $def-fz)
+			margin-top: 25px
+			margin-bottom: 20px
+			&:first-child
+				margin-top: -16px
+		p
+			margin-top: 27px			
+			font-size: em(14px, $def-fz)
+			padding-right: 15px
+			line-height: 24px
+			margin-right: -20px			
+
+	.map
+		margin-top: 50px
+
+	#g-map
+		height: 575px
+		
+		
+			
+/* Medium Devices, Desktops */
+@media only screen and (max-width : 992px)
+
+	.main-head
+		.logo
+			h2
+				margin-left: 12px
+				margin-right: 0px
+				font-size: em(16px, $def-fz)	
+				
+	.m-slider-wrap
+		width: 100%
+		.mini-slider
+			height: 210px	
+			.m-slide
+				img
+					height: 210px
+					width: 350px
+
+	.m-slider-nav		
+		.m-slider-prev 
+			left: 280px
+		.m-slider-next 
+			right: 280px	
+
+	.columns
+		position: relative
+		margin: 0 -10px		
+		.column-item	
+			max-width: 330px
+			margin-left: 17px
+			margin-right: 17px	
+			&:nth-child(3)
+				margin-top: 59px
+
+	.acticle
+		h3
+			margin: 10px			
+		p
+			margin: 10px
+
+	.parallax
+		.prl
+			font-size: em(55px, $def-fz)
+			line-height: 45px			
+		.prl-4th
+			font-size: em(25px, $def-fz)
+			line-height: 35px
+		.prl-hide
+			font-size: em(18px, $def-fz)
+			line-height: 23px	
+
+
+
+/* Small Devices, Tablets */
+@media only screen and (max-width : 768px)
+
+	.main-head
+		.logo
+			text-align: center
+			h2
+				display: none
+		.menu
+			
+			ul
+				text-align: center
+				li
+					padding: 10px
+			
+	.columns
+		position: relative
+		margin: 0 -10px		
+		.column-item	
+			max-width: 750px					
+			min-width: 300px		
+			&:nth-child(2)
+				margin-top: 59px	
+	
+	.m-slider-wrap
+		.mini-slider
+			height: 30vw	
+			.m-slide
+				img
+					height: 30vw
+					width: 100%
+
+	.m-slider-nav	
+		margin-right: auto
+		margin-left: auto
+		width: 500px	
+		.m-slider-prev 
+			left: 165px
+		.m-slider-next 
+			right: 165px		
+	
+	.popup-custom
+		width: 300px
+
+	.parallax
+		.prl
+			font-size: em(50px, $def-fz)
+			line-height: 50px	
+			&:nth-child(odd)
+				left: 15px					
+			&:nth-child(even)
+				right: 15px			
+		.prl-4th
+			font-size: em(20px, $def-fz)
+			line-height: 30px
+		.prl-hide
+			font-size: em(16px, $def-fz)
+			line-height: 22px	
+
+	/*Disable Animation on Mobile Devices*/
+	.animated
+		/*CSS transitions*/
+		-o-transition-property: none !important
+		-moz-transition-property: none !important
+		-ms-transition-property: none !important
+		-webkit-transition-property: none !important
+		transition-property: none !important
+		/*CSS transforms*/
+		-o-transform: none !important
+		-moz-transform: none !important
+		-ms-transform: none !important
+		-webkit-transform: none !important
+		transform: none !important
+		/*CSS animations*/
+		-webkit-animation: none !important
+		-moz-animation: none !important
+		-o-animation: none !important
+		-ms-animation: none !important
+		animation: none !important
+
+
+/* Additional*/
+@media only screen and (max-width : 600px)
+	
+	.btn-open-touch-area
+		display: block
+	
+		.btn-open
+			display: block
+	
+	.main-head		
+		.menu
+			display: none
+			ul		
+				margin-top: 133px		
+				li
+					display: block
+					padding: 0
+					line-height: 50px
+		
+	.f-slider-nav
+		.f-slider-prev, .f-slider-next 
+			display: none
+
+	.m-slider-wrap
+		.mini-slider
+			height: 56px	
+			.m-slide
+				img
+					height: 56vw
+					width: 100%
+
+	.m-slider-nav	
+		margin-right: auto
+		margin-left: auto
+		width: 260px	
+		.m-slider-prev 
+			left: 50px
+		.m-slider-next 
+			right: 50px	
+
+
+
+/* Extra Small Devices, Phones */
+@media only screen and (max-width : 480px)
+	.f-slider-wrap
+		.full-slider
+			height: 460px
+			.owl-dots
+				bottom: 14px	
+			.f-slide
+				padding-top: 30px				
+				&-bg					
+					height: 460px					
+				&-content					
+					.f-slide-header						
+						font-size: em(25px, $def-fz)						
+						margin: 14px 0
+					p
+						font-size: em(12px, $def-fz)	
+						letter-spacing: 0.03em
+						width: 270px
+						margin: 15px 0	
+		.btn-wrap
+			margin-top: 10px	
+		
+	.section-header
+		padding: 4px
+		height: 60px
+	
+	.m-slider-nav
+		margin-bottom: 22px		
+		
+	.columns
+		margin: 0 -15px		
+		.column-item
+			margin: 0 9px
+			padding-left: 0px
+			margin-top: 19px
+			margin-bottom: 1px
+			p
+				margin-top: 28px
+			&:nth-child(1)
+				margin-top: 12px			
+			&:nth-child(2), &:nth-child(3)
+				margin-top: 18px
+		
+	.acticle
+		h3
+			margin-top: 25px
+			margin-bottom: 27px	
+			margin-left: -6px
+			&:first-child
+				margin-top: -2px
+		p
+			margin-left: -6px
+			min-width: 316px
+		
+	.map
+		margin-top: 50px
+		
+	#g-map
+		height: 350px
+		width: 100%
+
+	.parallax
+		.prl
+			font-size: em(40px, $def-fz)
+			line-height: 40px	
+			padding: 4px 10px
+			&:nth-child(odd)
+				left: 10px					
+			&:nth-child(even)
+				right: 10px			
+		.prl-4th
+			font-size: em(16px, $def-fz)
+			line-height: 24px
+			margin-left: 10px
+		.prl-hide
+			font-size: em(13px, $def-fz)
+			padding: 5px 10px
+			line-height: 20px	
+
+
+
+/* Custom, iPhone Retina */
+@media only screen and (max-width : 320px)
+	/**/
+	
+			
+
+/*==========  Mobile First Method  ==========*/
+
+/* Custom, iPhone Retina */
+@media only screen and (min-width : 320px)
+	/**/
+
+
+/* Extra Small Devices, Phones */
+@media only screen and (min-width : 480px)
+	/**/
+	
+
+/* my */
+@media only screen and (min-width : 600px)
+
+	.main-head		
+		.menu
+			display: block !important
+
+	.btn-open-touch-area
+		display: none !important
+
+		.btn-open
+			display: none !important
+			
+	.btn-close-touch-area
+		display: none !important
+		
+		.btn-close
+			display: none !important
+
+
+
+/* Small Devices, Tablets */
+@media only screen and (min-width : 768px)
+	/**/
+
+
+/* Medium Devices, Desktops */
+@media only screen and (min-width : 992px)
+	/**/
+
+
+/* Large Devices, Wide Screens */
+@media only screen and (min-width : 1200px)
+	/**/
+
+
+@media (hover:none), (hover:on-demand) 
+
+	.main-head
+		.menu
+			ul
+				li
+					a:hover
+						color: $main-color
+					a:active
+						color: $hover-color
+
+	.f-slider-nav
+		.f-slider-prev, .f-slider-next 
+			&:hover
+				background-image: url("../img/arrow-white.svg")
+				background-color: inherit
+			&:acive
+				background-image: url("../img/arrow-black.svg")
+				background-color: #fff
+
+	.btn-wrap
+		.btn
+			&:hover
+				background-color: $main-color
+			&:active
+				background-color: $hover-color			
+  
+	.m-slider-nav
+		.m-slider-prev, .m-slider-next
+			&:hover
+				background-image: url("../img/arrow-gray.svg")
+				background-color: inherit
+			&:active
+				background-image: url("../img/arrow-white.svg")
+				background-color: $main-color
+
+	.columns		
+		.column-item
+			p
+				a:hover
+					color: $main-color
+				a:hover
+					color: $hover-color
+
+	.acticle		
+		p			
+			a:hover
+				color: #000
+			a:active
+				color: $hover-color
+
+
+		
